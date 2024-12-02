@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EntrepriseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
 #[ApiResource]
 class Entreprise
