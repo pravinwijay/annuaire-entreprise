@@ -1,50 +1,45 @@
-<script setup>
-import { ref, computed } from 'vue';
-import Home from './components/TheWelcome.vue';
-import Entreprises from './components/Entreprise.vue';
-import NotFound from './components/NotFound.vue';
-
-// Définir les routes
-const routes = {
-  '/': Home,
-  '/entreprises': Entreprises,
-};
-
-// Détecter la route actuelle (basée sur le hash)
-const currentPath = ref(window.location.hash.slice(1) || '/');
-
-window.addEventListener('hashchange', () => {
-  currentPath.value = window.location.hash.slice(1) || '/';
-});
-
-// Calculer quel composant afficher en fonction de la route
-const currentView = computed(() => {
-  return routes[currentPath.value] || NotFound;
-});
-</script>
-
 <template>
-  <header>
-    <nav>
-      <a href="#/">Home</a> |
-      <a href="#/entreprises">Entreprises</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Charger dynamiquement le composant correspondant à la route -->
-    <component :is="currentView" />
-  </main>
+  <div>
+    <!-- La vue de la route actuelle sera rendue ici -->
+    <router-view></router-view>
+  </div>
 </template>
 
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Fonction pour naviguer vers une route spécifique
+const goToRoute = (route) => {
+  router.push(route);  // Utilisation de router.push pour rediriger vers la route
+};
+</script>
+
 <style scoped>
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #42b983;
+/* Style de la barre de navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Espace entre les éléments */
+  align-items: center; /* Aligner verticalement les éléments */
+  padding: 10px;
+  background-color: #746657; /* Couleur de fond de la navbar */
 }
 
-nav a:hover {
-  text-decoration: underline;
+/* Style des boutons dans la barre de navigation */
+.navbar button {
+  padding: 10px 20px; /* Espacement interne des boutons */
+  border: none; /* Retirer les bordures des boutons */
+  background-color: transparent; /* Pas de fond pour les boutons */
+  color: #e7dfd8; /* Couleur du texte des boutons */
+  font-size: 16px; /* Taille du texte */
+  cursor: pointer; /* Curseur en forme de main */
+  transition: none; /* Pas d'animation */
+}
+
+/* Style au survol des boutons */
+.navbar button:hover {
+  background-color: transparent; /* Pas de changement de fond au survol */
+  color: #e7dfd8; /* Garder la couleur du texte inchangée au survol */
 }
 </style>
