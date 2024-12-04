@@ -50,33 +50,51 @@
   import { ref } from "vue";
   import { useRouter } from "vue-router";
   
-  const email = ref("");
-  const password = ref("");
-  const role = ref("user");
-  const successMessage = ref("");
-  const errorMessage = ref("");
-  const router = useRouter();
-  
-  const createAccount = async () => {
-    try {
-      const response = await fetch("/api/create-account", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.value, password: password.value, role: role.value }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Erreur lors de la création du compte.");
-      }
-  
+ // Variables réactives pour les champs du formulaire
+const nom = ref("");
+const prenom = ref("");
+const email = ref("");
+const telephone = ref("");
+const password = ref("");
+const isAdmin = ref("false"); // "false" ou "true" sous forme de chaîne
+const successMessage = ref("");
+const errorMessage = ref("");
+
+// Fonction de création de compte
+const createAccount = async () => {
+  try {
+    // Appel POST à l'API pour créer un utilisateur
+    const response = await axios.post("http://127.0.0.1:8000/api/utilisateurs", {
+      nom: nom.value,
+      prenom: prenom.value,
+      email: email.value,
+      telephone: parseInt(telephone.value, 10), // Conversion en nombre
+      mdp: password.value, // Ne changez pas cela si l'API attend ce champ
+      admin: isAdmin.value === "true", // Conversion en booléen
+    }, {
+      headers: {
+        "Content-Type": "application/ld+json", // Définir le bon type de contenu
+      },
+    });
+
+    // Vérification du succès de la requête
+    if (response.status === 201) {
       successMessage.value = "Compte créé avec succès.";
+      
+      // Réinitialisation des champs après succès
+      nom.value = "";
+      prenom.value = "";
       email.value = "";
+      telephone.value = "";
       password.value = "";
-      role.value = "user";
-    } catch (error) {
-      errorMessage.value = error.message;
+      isAdmin.value = "false"; // Réinitialiser le rôle à "Utilisateur"
+    } else {
+      throw new Error("Erreur lors de la création du compte.");
     }
-  };
+  } catch (error) {
+    errorMessage.value = error.response?.data?.message || error.message;
+  }
+};
   
   // Méthodes de navigation
   const goHome = () => {
