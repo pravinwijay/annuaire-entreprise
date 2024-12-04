@@ -1,7 +1,14 @@
 <template>
     <div class="new-compte-container">
-      <PageHeader title="Créer un compte" />
+      <!-- Barre de navigation -->
+      <nav class="navbar">
+        <button @click="goHome">Accueil</button>
+        <div class="center">Mon Application</div>
+        <button @click="goLogin">Se connecter</button>
+      </nav>
   
+      <PageHeader title="Créer un compte" />
+    
       <form @submit.prevent="createAccount">
         <div class="form-group">
           <label for="email">Email :</label>
@@ -32,7 +39,7 @@
         </div>
         <button type="submit">Créer un compte</button>
       </form>
-  
+    
       <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
@@ -41,12 +48,14 @@
   <script setup>
   import PageHeader from "@/components/PageHeader.vue";
   import { ref } from "vue";
+  import { useRouter } from "vue-router";
   
   const email = ref("");
   const password = ref("");
   const role = ref("user");
   const successMessage = ref("");
   const errorMessage = ref("");
+  const router = useRouter();
   
   const createAccount = async () => {
     try {
@@ -68,24 +77,75 @@
       errorMessage.value = error.message;
     }
   };
+  
+  // Méthodes de navigation
+  const goHome = () => {
+    router.push("/home");
+  };
+  
+  const goLogin = () => {
+    router.push("/login");
+  };
   </script>
   
   <style scoped>
+  /* Style global pour le body */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  /* Barre de navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #746657;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+  }
+  
+  .navbar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent;
+    color: #e7dfd8;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  .navbar button:hover {
+    color: #ffffff;
+  }
+  
+  .navbar .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Style pour le conteneur principal */
   .new-compte-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: calc(100vh - 80px); /* Ajuste la hauteur pour prendre en compte la barre de nav */
     background-color: #f0f0f0;
+    padding: 20px;
   }
   
+  /* Style du formulaire */
   form {
     background: white;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    max-width: 300px;
+    max-width: 400px;
     width: 100%;
   }
   
