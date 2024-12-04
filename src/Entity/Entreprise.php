@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EntrepriseRepository;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
@@ -27,7 +31,7 @@ class Entreprise
     #[ORM\Column(length: 255)]
     private ?string $contact = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: "nb_employe", type: "integer")]
     private ?int $nb_employe = null;
 
     #[ORM\Column(length: 255)]
