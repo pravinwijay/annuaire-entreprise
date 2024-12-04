@@ -3,7 +3,7 @@
     <!-- Barre de navigation occupant toute la largeur -->
     <div class="navbar">
       <button @click="goToRoute('/liste-entreprises')">Entreprise</button>
-      <button class="center" @click="goToRoute('/avis')">Avis</button>
+      <button class="center" @click="goToRoute('/mes-avis')">Mes Avis</button>
       <button @click="goToRoute('/mon-compte')">Mon compte</button>
     </div>
 
