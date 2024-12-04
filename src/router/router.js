@@ -1,23 +1,28 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Accueil from '../components/Accueil.vue';
+import ListeEntreprises from '../components/ListeEntreprises.vue';
 import Entreprise from '../components/Entreprise.vue';
 import Avis from '../components/Avis.vue';
 import MonCompte from '../components/MonCompte.vue';
 import NotFound from '../components/NotFound.vue';
-import Login from '../components/Login.vue';
 
 const routes = [
   { path: '/', component: Accueil },
-  { path: '/entreprise', component: Entreprise },
+  { path: '/liste-entreprises', component: ListeEntreprises },  // Liste des entreprises
+  { 
+    path: '/entreprise/:entrepriseName', // Paramètre dynamique entrepriseName
+    name: 'entreprise',
+    component: Entreprise,
+    props: true  // Permet de passer le paramètre comme prop dans le composant
+  },
   { path: '/avis', component: Avis },
   { path: '/mon-compte', component: MonCompte },
-  { path: '/login', component: Login },
   { path: '/:pathMatch(.*)*', component: NotFound }, // Page 404
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),  // Utilisation du mode hash
-  routes,  // Routes définies
+  history: createWebHashHistory(),
+  routes,
 });
 
 export default router;
