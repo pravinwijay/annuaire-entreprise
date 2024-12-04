@@ -1,96 +1,125 @@
+<template>
+  <div class="login-container">
+    <PageHeader title="Connexion" />
+
+    <form @submit.prevent="login">
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input
+          type="email"
+          id="email"
+          v-model="email"
+          placeholder="Entrez votre email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe :</label>
+        <input
+          type="password"
+          id="password"
+          v-model="password"
+          placeholder="Entrez votre mot de passe"
+          required
+        />
+      </div>
+      <button type="submit">Se connecter</button>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </form>
+  </div>
+</template>
+
 <script setup>
-import { ref } from 'vue';
+import PageHeader from "@/components/PageHeader.vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const email = ref('');
-const password = ref('');
-const errorMessage = ref('');
+const email = ref("");
+const password = ref("");
+const errorMessage = ref("");
+const router = useRouter();
 
-// Fonction de gestion du login
 const login = async () => {
   try {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email.value, password: password.value }),
     });
 
     if (!response.ok) {
-      throw new Error('Login failed. Check your credentials.');
+      throw new Error("Email ou mot de passe incorrect.");
     }
 
     const data = await response.json();
-    alert('Login successful! Token: ' + data.token); // Vous pouvez utiliser un token pour authentifier l'utilisateur
-    window.location.hash = '#/accueil'; // Redirection vers la page d'accueil
+
+    localStorage.setItem("authToken", data.token);
+    localStorage.setItem("userRole", data.role); // "admin" ou "user"
+
+    if (data.role === "admin") {
+      router.push("/liste-entreprises");
+    } else {
+      router.push("/accueil");
+    }
   } catch (error) {
     errorMessage.value = error.message;
   }
 };
 </script>
 
-<template>
-  <div class="login-container">
-    <h1>Connexion</h1>
-    <form @submit.prevent="login">
-      <div>
-        <label for="email">Email :</label>
-        <input type="email" id="email" v-model="email" required />
-      </div>
-      <div>
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" v-model="password" required />
-      </div>
-      <button type="submit">Se connecter</button>
-      <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
-    </form>
-  </div>
-</template>
-
 <style scoped>
 .login-container {
-  background-color: #e7dfd8;
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
 }
 
 form {
-  max-width: 300px;
+  background: white;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  max-width: 300px;
+  width: 100%;
 }
 
-form div {
-  margin-bottom: 10px;
+.form-group {
+  margin-bottom: 15px;
 }
 
-form label {
+label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
-form input {
+input {
   width: 100%;
   padding: 8px;
-  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-form button {
-  margin-top: 10px;
-  padding: 10px 20px;
+button {
+  width: 100%;
+  padding: 10px;
   background-color: #42b983;
   color: white;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
 }
 
-form button:hover {
+button:hover {
   background-color: #36a378;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 </style>

@@ -2,9 +2,9 @@
   <div class="accueil-container">
     <!-- Barre de navigation occupant toute la largeur -->
     <div class="navbar">
-      <button @click="goToRoute('/liste-entreprises')">Entreprise</button>
-      <button class="center" @click="goToRoute('/mes-avis')">Mes Avis</button>
-      <button @click="goToRoute('/mon-compte')">Mon compte</button>
+      <button @click="goToRoute('/liste-entreprises')">ENTREPRISE</button>
+      <button class="center" @click="goToRoute('/mes-avis')">MES AVIS</button>
+      <button @click="goToRoute('/mon-compte')">MON COMPTE</button>
     </div>
 
     <!-- Contenu principal divisé en deux : texte à gauche et image à droite -->
@@ -20,7 +20,7 @@
 
       <div class="right-side">
         <img
-          src="https://www.africatopsuccess.com/wp-content/uploads/2017/01/kaaris-la-tracklist-de-or-noir-reedition-jpg.jpg"
+          src="https://ceoworld.biz/wp-content/uploads/2019/06/Apple.jpg"
           alt="Image d'accueil"
         />
       </div>
@@ -53,10 +53,11 @@ const goToRoute = (route) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 20px 40px; /* Taille doublée */
   background-color: #746657;
   width: 100%; 
   box-sizing: border-box;
+  font-size: 1.5rem; /* Taille du texte plus grande */
 }
 
 .navbar button {
@@ -64,13 +65,15 @@ const goToRoute = (route) => {
   border: none;
   background-color: transparent;
   color: #e7dfd8;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold; /* Texte en gras */
+  text-transform: uppercase; /* Texte en majuscules */
   cursor: pointer;
 }
 
 .navbar button:hover {
   background-color: transparent;
-  color: #e7dfd8;
+  color: #ffffff; /* Changement de couleur au survol */
 }
 
 .navbar .center {
