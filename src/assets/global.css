@@ -83,7 +83,6 @@ body {
   
   /* Button Styles */
   button {
-    background-color: #42b983;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -92,9 +91,7 @@ body {
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #358b5c;
-  }
+
   
   /* General input and select styles */
   input, select {
@@ -163,7 +160,6 @@ body {
   button {
     width: 100%;
     padding: 10px;
-    background-color: #42b983;
     color: white;
     border: none;
     border-radius: 5px;
@@ -171,9 +167,7 @@ body {
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #36a378;
-  }
+
   
   /* Message styles */
   .success-message {

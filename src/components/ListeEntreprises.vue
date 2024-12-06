@@ -72,11 +72,14 @@ const goToRoute = (route) => {
 </script>
 
 <style scoped>
+/* Container styles */
 .entreprise-container {
   background-color: #e7dfd8;
   text-align: center;
+  padding-top: 100px; /* Pour éviter le chevauchement avec la navbar fixe */
 }
 
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -84,39 +87,50 @@ const goToRoute = (route) => {
   padding: 20px 40px;
   background-color: #746657;
   font-size: 1.5rem;
+  position: fixed; /* Navbar fixe */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 .navbar button {
   padding: 10px 20px;
   border: none;
-  background-color: transparent;
+  background-color: transparent; /* Retirer toute couleur de fond */
   color: #e7dfd8;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
+  outline: none; /* Supprime les styles de focus par défaut */
 }
 
 .navbar button:hover {
-  color: #ffffff;
+  color: #ffffff; /* Change uniquement la couleur du texte */
 }
 
-.navbar .center {
-  margin-left: auto;
-  margin-right: auto;
+.navbar button:active,
+.navbar button:focus {
+  background-color: transparent; /* Retirer toute couleur de fond au clic ou focus */
+  box-shadow: none; /* Supprime toute ombre */
 }
 
+/* Title */
 h1 {
   color: #746657;
   margin: 40px 0;
 }
 
+/* Table Styles */
 .enterprise-table {
   margin: 0 auto;
   width: 80%;
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Coins arrondis */
+  overflow: hidden; /* Empêche le débordement des coins arrondis */
 }
 
 .enterprise-table th,
@@ -139,6 +153,7 @@ h1 {
   background-color: #f1f1f1;
 }
 
+/* Filter input */
 .filter-input {
   margin-top: 5px;
   padding: 5px;
@@ -149,8 +164,8 @@ h1 {
   border-radius: 4px;
 }
 
+/* Buttons inside the table */
 button {
-  background-color: #42b983;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -159,7 +174,4 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #358b5c;
-}
 </style>
