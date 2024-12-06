@@ -166,6 +166,7 @@ h1 {
 
 /* Buttons inside the table */
 button {
+  background-color: #746657;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -174,4 +175,7 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #746657;
+}
 </style>
