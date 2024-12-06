@@ -1,184 +1,184 @@
-/* Global body styles */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #e7dfd8; /* Background couleur générale */
-    color: #333; /* Couleur de texte par défaut */
-  }
-  
-  /* Navbar Styles */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background-color: #746657;
-    font-size: 1.5rem;
-    width: 100%;
-    position: fixed;  /* Navbar fixe en haut */
-    top: 0;
-    left: 0;
-    z-index: 100;
-  }
-  
-  .navbar button {
-    padding: 10px 20px;
-    border: none;
-    background-color: transparent;
-    color: #e7dfd8;
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  
-  .navbar button:hover {
-    color: #ffffff;
-  }
-  
-  .navbar .center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Table Styles */
-  table {
-    margin: 0 auto;
-    width: 80%;  /* Centrer la table */
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  table th,
-  table td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ccc;
-  }
-  
-  table th {
-    background-color: #746657;
-    color: white;
-  }
-  
-  table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Filter input styles */
-  input[type="text"] {
-    margin-top: 5px;
-    padding: 5px;
-    width: 100%;
-    max-width: 150px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Button Styles */
-  button {
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+  /* Global body styles */
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e7dfd8; /* Background couleur générale */
+      color: #333; /* Couleur de texte par défaut */
+    }
+    
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #746657;
+      font-size: 1.5rem;
+      width: 100%;
+      position: fixed;  /* Navbar fixe en haut */
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+    
+    .navbar button {
+      padding: 10px 20px;
+      border: none;
+      background-color: transparent;
+      color: #e7dfd8;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    
+    .navbar button:hover {
+      color: #ffffff;
+    }
+    
+    .navbar .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Table Styles */
+    table {
+      margin: 0 auto;
+      width: 80%;  /* Centrer la table */
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+    
+    table th {
+      background-color: #746657;
+      color: white;
+    }
+    
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+    
+    /* Filter input styles */
+    input[type="text"] {
+      margin-top: 5px;
+      padding: 5px;
+      width: 100%;
+      max-width: 150px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    /* Button Styles */
+    button {
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
 
-  
-  /* General input and select styles */
-  input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  /* Avis list styles */
-  .avis-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-  }
-  
-  .avis-bubble {
-    padding: 15px;
-    background-color: #e7dfd8;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .avis-bubble h3 {
-    margin: 0 0 5px;
-    color: #746657;
-  }
-  
-  .avis-bubble p {
-    margin: 0 0 10px;
-  }
-  
-  .avis-bubble small {
-    color: #888;
-  }
-  
-  /* Form Styles */
-  form {
-    background: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input,
-  select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+    
+    /* General input and select styles */
+    input, select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    /* Avis list styles */
+    .avis-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+    }
+    
+    .avis-bubble {
+      padding: 15px;
+      background-color: #e7dfd8;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .avis-bubble h3 {
+      margin: 0 0 5px;
+      color: #746657;
+    }
+    
+    .avis-bubble p {
+      margin: 0 0 10px;
+    }
+    
+    .avis-bubble small {
+      color: #888;
+    }
+    
+    /* Form Styles */
+    form {
+      background: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
 
-  
-  /* Message styles */
-  .success-message {
-    color: green;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
+    
+    /* Message styles */
+    .success-message {
+      color: green;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
