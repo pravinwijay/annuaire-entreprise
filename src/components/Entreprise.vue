@@ -70,6 +70,9 @@
   const goToRoute = (route) => {
     router.push(route);
   };
+
+  // Fonction de création de compte
+
   </script>
   
   <style scoped>

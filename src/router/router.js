@@ -8,6 +8,7 @@ import MonCompte from '../components/MonCompte.vue';
 import NotFound from '../components/NotFound.vue';
 import MesAvis from "../components/MesAvis.vue"; // Importation du nouveau composant
 import NewCompte from "../components/NewCompte.vue";
+import NewEntreprise from '@/components/NewEntreprise.vue';
 
 
 
@@ -21,7 +22,8 @@ const routes = [
     props: true  // Permet de passer le paramètre comme prop dans le composant
   },
   { path: "/mes-avis", component: MesAvis }, // Route pour Mes Avis
-  { path: "/new-compte", component: NewCompte }, // Nouvelle route
+  { path: "/new-compte", component: NewCompte },
+  { path: "/new-entreprise", component: NewEntreprise }, // Nouvelle route
   { path: "/login", component: Login }, // Route pour Mes Avis
   { path: '/avis', component: Avis },
   { path: '/mon-compte', component: MonCompte },

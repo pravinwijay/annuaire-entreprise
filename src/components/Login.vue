@@ -50,8 +50,8 @@ const router = useRouter();
 
 const login = async () => {
   try {
-    const response = await fetch("/api/login", {
-      method: "POST",
+    const response = await fetch("/api/utilisateurs", {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email.value, password: password.value }),
     });
