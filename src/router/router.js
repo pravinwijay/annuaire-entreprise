@@ -6,28 +6,21 @@ import Entreprise from '../components/Entreprise.vue';
 import Avis from '../components/Avis.vue';
 import MonCompte from '../components/MonCompte.vue';
 import NotFound from '../components/NotFound.vue';
-import MesAvis from "../components/MesAvis.vue"; // Importation du nouveau composant
+import MesAvis from "../components/MesAvis.vue";
 import NewCompte from "../components/NewCompte.vue";
 import NewEntreprise from '@/components/NewEntreprise.vue';
 
-
-
 const routes = [
-  { path: '/accueil', component: Accueil },
-  { path: '/liste-entreprises', component: ListeEntreprises },  // Liste des entreprises
-  { 
-    path: '/entreprise/:entrepriseName', // Paramètre dynamique entrepriseName
-    name: 'entreprise',
-    component: Entreprise,
-    props: true  // Permet de passer le paramètre comme prop dans le composant
-  },
-  { path: "/mes-avis", component: MesAvis }, // Route pour Mes Avis
+  { path: '/', component: Accueil },
+  { path: '/liste-entreprises', component: ListeEntreprises },  
+  { path: '/entreprise/:entrepriseName',component: Entreprise,props: true },
+  { path: "/mes-avis", component: MesAvis }, 
   { path: "/new-compte", component: NewCompte },
-  { path: "/new-entreprise", component: NewEntreprise }, // Nouvelle route
-  { path: "/login", component: Login }, // Route pour Mes Avis
+  { path: "/new-entreprise", component: NewEntreprise }, 
+  { path: "/login", component: Login }, 
   { path: '/avis', component: Avis },
   { path: '/mon-compte', component: MonCompte },
-  { path: '/:pathMatch(.*)*', component: NotFound }, // Page 404
+  { path: '/:pathMatch(.*)*', component: NotFound }, 
 ];
 
 const router = createRouter({

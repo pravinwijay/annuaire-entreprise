@@ -1,11 +1,6 @@
 <template>
   <div class="entreprise-container">
-    <!-- Navbar -->
-    <div class="navbar">
-      <button @click="goToRoute('/accueil')">ACCUEIL</button>
-      <button class="center" @click="goToRoute('/mes-avis')">MES AVIS</button>
-      <button @click="goToRoute('/mon-compte')">MON COMPTE</button>
-    </div>
+
 
     <!-- Title -->
     <h1>Liste des Entreprises</h1>

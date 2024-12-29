@@ -1,11 +1,6 @@
 <template>
   <div class="new-compte-container">
-    <!-- Barre de navigation -->
-    <nav class="navbar">
-      <button @click="goHome">Accueil</button>
-      <div class="center">Mon Application</div>
-      <button @click="goLogin">Se connecter</button>
-    </nav>
+   
 
     <PageHeader title="Créer un compte" />
   

@@ -1,10 +1,6 @@
 <template>
   <div class="mes-avis-container">
-    <div class="navbar">
-      <button @click="goToRoute('/accueil')">ACCUEIL</button>
-      <button class="center" @click="goToRoute('/liste-entreprises')">ENTREPRISE</button>
-      <button @click="goToRoute('/mon-compte')">MON COMPTE</button>
-    </div>
+    
     <div class="main-content">
       <h1 class="title">MES AVIS</h1>
       

@@ -1,11 +1,5 @@
 <template>
   <div class="mon-compte-container">
-    <!-- Navbar -->
-    <div class="navbar">
-      <button @click="goToRoute('/accueil')">ACCUEIL</button>
-      <button class="center" @click="goToRoute('/mes-avis')">MES AVIS</button>
-      <button @click="goToRoute('/liste-entreprises')">ENTREPRISE</button>
-    </div>
 
     <!-- Main Content -->
     <div class="main-content">

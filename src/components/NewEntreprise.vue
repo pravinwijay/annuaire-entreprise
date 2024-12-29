@@ -1,55 +1,40 @@
 <template>
     <div class="new-compte-container">
-      <!-- Barre de navigation -->
-      <nav class="navbar">
-        <button @click="goHome">Accueil</button>
-        <div class="center">Mon Application</div>
-        <button @click="goLogin">Se connecter</button>
-      </nav>
-  
-      <PageHeader title="Ajouter une entreprise" />
+       
+      <PageHeader class="pageHeader" title="Ajouter une entreprise" />
   
       <form @submit.prevent="ajoutEntreprise" >
-        <!-- Champ pour le nom -->
+
         <div class="form-group">
           <label for="nom">Nom :</label>
           <input type="text" id="nom" v-model="nom" required />
         </div>
   
-        <!-- Champ pour l'adresse -->
         <div class="form-group">
           <label for="adresse">Adresse :</label>
           <input type="text" id="adresse" v-model="adresse" required />
         </div>
   
-        <!-- Champ pour le secteur -->
         <div class="form-group">
           <label for="secteur">Secteur :</label>
           <input type="text" id="secteur" v-model="secteur" required />
         </div>
   
-        <!-- Champ pour le contact -->
         <div class="form-group">
           <label for="contact">Contact :</label>
           <input type="text" id="contact" v-model="contact" required />
         </div>
   
-        <!-- Champ pour le nombre d'employés -->
         <div class="form-group">
           <label for="nb_employe">Nombre d'employés :</label>
           <input type="number" id="nb_employe" v-model="nb_employe" required />
         </div>
   
-      
-  
-        <!-- Bouton pour soumettre le formulaire -->
         <button type="submit">Ajouter une entreprise</button>
+
       </form>
-  
-      <!-- Message de succès -->
-      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-      <!-- Message d'erreur -->
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+        <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </template>
   
@@ -59,25 +44,17 @@
   import { useRouter } from "vue-router";
   import axios from "axios";
   
-  // Variables réactives pour les champs du formulaire
   const nom = ref("");
   const adresse = ref("");
   const secteur = ref("");
   const contact = ref("");
   const nb_employe = ref(0);
-  const image = ref(""); // Référence pour stocker le fichier sélectionné
-  
-  // Variables pour les messages
+  const image = ref(""); 
   const successMessage = ref("");
   const errorMessage = ref("");
   
-  // Gestion du fichier sélectionné
- 
-  
-  // Obtenir l'objet router
   const router = useRouter();
   
-  // Fonction de création d'entreprise
   const ajoutEntreprise = async () => {
   try {
     // Appel POST à l'API pour créer un utilisateur
@@ -85,66 +62,41 @@
       nom: nom.value,
       adresse: adresse.value,
       secteur: secteur.value,
-      contact: contact.value, // Conversion en nombre
-      nb_employe: nb_employe.value, // Le mot de passe
-      image: image.value, // Conversion en booléen
+      contact: contact.value, 
+      nb_employe: nb_employe.value, 
+      image: image.value,
     }, {
       headers: {
-        "Content-Type": "application/ld+json", // Définir le bon type de contenu
+        "Content-Type": "application/ld+json", 
       },
     });
 
-    // Vérification du succès de la requête
     if (response.status === 201) {
       successMessage.value = "Entreprise ajoutée avec succès.";
-
-      // Réinitialisation des champs après succès
       nom.value = "";
       adresse.value = "";
       secteur.value = "";
       nb_employe.value = 0;
       contact.value = "";
       image.value = "";
-      errorMessage.value = ""; // Effacer le message d'erreur
+      errorMessage.value = ""; 
     } else {
       throw new Error("Erreur lors de l'ajout de l'entreprise.");
     }
   } catch (error) {
     errorMessage.value = error.response?.data?.message || error.message;
-    successMessage.value = ""; // Effacer le message de succès
+    successMessage.value = ""; 
   }
 };
-
-  // Méthodes de navigation
-  const goHome = () => {
-    router.push("/home");
-  };
-  
-  const goLogin = () => {
-    router.push("/login");
-  };
   </script>
-  
-  
+
   <style scoped>
-  /* Style global pour le body */
   body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
   }
-  
-  /* Barre de navigation */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background-color: #746657;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 1.5rem;
-  }
+
   
   .navbar button {
     padding: 10px 20px;
@@ -218,6 +170,10 @@
   
   button:hover {
     background-color: #36a378;
+  }
+
+  .pageHeader {
+    margin-bottom: 50px;
   }
   
   .success-message {

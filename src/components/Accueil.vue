@@ -1,12 +1,6 @@
 <template>
   <div class="accueil-container">
-    <div class="navbar">
-      <button @click="goToRoute('/liste-entreprises')">ENTREPRISE</button>
-      <button class="center" @click="goToRoute('/mes-avis')">MES AVIS</button>
-      <button @click="goToRoute('/mon-compte')">MON COMPTE</button>
-    </div>
     <div class="main-content">
-      <!-- Texte centré à gauche -->
       <div class="left-side">
         <h1>Bienvenue sur notre site !</h1>
         <p>
@@ -15,28 +9,15 @@
           améliorer votre entreprise et optimiser vos processus.
         </p>
       </div>
-      <!-- Image à droite -->
       <div class="right-side">
         <img
-          src="https://ceoworld.biz/wp-content/uploads/2019/06/Apple.jpg"
-          alt="Image d'accueil"
-        />
+          src="https://ceoworld.biz/wp-content/uploads/2019/06/Apple.jpg"/>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { useRouter } from "vue-router";
-const router = useRouter();
-
-const goToRoute = (route) => {
-  router.push(route);
-};
-</script>
-
 <style scoped>
-/* Conteneur principal */
 .accueil-container {
   width: 100%;
   min-height: 100vh;
@@ -45,8 +26,6 @@ const goToRoute = (route) => {
   align-items: center;
   background-color: #e7dfd8;
 }
-
-/* Barre de navigation */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -60,7 +39,6 @@ const goToRoute = (route) => {
   left: 0;
   z-index: 100;
 }
-
 .navbar button {
   padding: 10px 20px;
   border: none;
@@ -71,29 +49,23 @@ const goToRoute = (route) => {
   text-transform: uppercase;
   cursor: pointer;
 }
-
 .navbar button:hover {
   color: #ffffff;
 }
-
 .navbar .center {
   margin-left: auto;
   margin-right: auto;
 }
-
-/* Contenu principal */
 .main-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 80px; /* Ajustement pour la navbar fixe */
+  margin-top: 80px;
   padding: 20px;
   width: 100%;
-  height: calc(100vh - 80px); /* Pour prendre en compte la hauteur de la navbar */
+  height: calc(100vh - 80px); 
   box-sizing: border-box;
 }
-
-/* Section gauche : Texte centré */
 .left-side {
   flex: 1;
   display: flex;
@@ -103,20 +75,16 @@ const goToRoute = (route) => {
   text-align: left;
   padding: 20px;
 }
-
 .left-side h1 {
   font-size: 2.5rem;
   color: #333;
   margin-bottom: 20px;
 }
-
 .left-side p {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #555;
 }
-
-/* Section droite : Image */
 .right-side {
   flex: 1;
   display: flex;
@@ -124,7 +92,6 @@ const goToRoute = (route) => {
   align-items: center;
   padding: 20px;
 }
-
 .right-side img {
   max-width: 100%;
   max-height: 80%;
