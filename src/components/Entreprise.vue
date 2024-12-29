@@ -1,12 +1,6 @@
 <template>
   <div class="entreprise-container">
-<<<<<<< HEAD
-    <div class="main-content">
-      <div class="right-side">
-        <h1>{{ entreprise?.nom || 'Entreprise non trouvée' }}</h1>
-        <p> {{ entreprise?.description || 'Aucune description disponible.' }}</p>
-=======
-    <!-- Navbar -->
+  
     
 
     <!-- Main Content -->
@@ -14,7 +8,6 @@
       <div class="right-side">
         <h1>{{ entreprise?.nom || 'Entreprise non trouvée' }}</h1>
         <p>{{ entreprise?.secteur || 'Aucune description disponible.' }}</p>
->>>>>>> 1ab78f6b0d3721e525e9a16a0ed98f23ef299a0f
         <button @click="goToComment" class="submit-avis-btn">Saisir mon commentaire</button>
       </div>
       <div class="left-side">
@@ -57,23 +50,11 @@ const fetchEntreprise = async () => {
 const fetchCommentaires = async () => {
   try {
     const response = await axios.get("http://127.0.0.1:8000/api/commentaires");
-<<<<<<< HEAD
     const allCommentaires = response.data.member;
-=======
-    // Filtrer les commentaires pour l'entreprise en question
-    const allCommentaires = response.data.member || [];
->>>>>>> 1ab78f6b0d3721e525e9a16a0ed98f23ef299a0f
     commentairesList.value = await Promise.all(
       allCommentaires
         .filter((comment) => comment.entreprise === `/api/entreprises/${entrepriseId}`)
         .map(async (comment) => {
-<<<<<<< HEAD
-          const userResponse = await axios.get(`http://127.0.0.1:8000${comment.utilisateur}`);
-          return {
-            utilisateur: userResponse.data.nom || "Utilisateur inconnu",
-            commentaire: comment.commentaire,
-          };
-=======
           const userId = comment.utilisateur; // L'ID de l'utilisateur dans le commentaire
           try {
             const userResponse = await axios.get(`http://127.0.0.1:8000${comment.utilisateur}`);
@@ -89,7 +70,6 @@ const fetchCommentaires = async () => {
               commentaire: comment.commentaire,
             };
           }
->>>>>>> 1ab78f6b0d3721e525e9a16a0ed98f23ef299a0f
         })
     );
   } catch (error) {
@@ -98,8 +78,6 @@ const fetchCommentaires = async () => {
   }
 };
 
-<<<<<<< HEAD
-=======
 // Naviguer vers une autre page
 const goToRoute = (route) => {
   router.push(route);
@@ -111,7 +89,6 @@ const goToComment = () => {
 };
 
 // Charger les données au montage du composant
->>>>>>> 1ab78f6b0d3721e525e9a16a0ed98f23ef299a0f
 onMounted(async () => {
   await fetchEntreprise();
   await fetchCommentaires();
