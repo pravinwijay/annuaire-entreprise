@@ -1,6 +1,7 @@
 <template>
   <div class="new-compte-container">
 
+<<<<<<< HEAD
     <PageHeader class="pageHeader" title="Ajouter une entreprise" />
 
     <form @submit.prevent="ajoutEntreprise">
@@ -37,6 +38,40 @@
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
+=======
+        <div class="form-group">
+          <label for="nom">Nom :</label>
+          <input type="text" id="nom" v-model="nom" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="adresse">Adresse :</label>
+          <input type="text" id="adresse" v-model="adresse" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="secteur">Secteur :</label>
+          <input type="text" id="secteur" v-model="secteur" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="contact">Contact :</label>
+          <input type="text" id="contact" v-model="contact" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="nb_employe">Nombre d'employés :</label>
+          <input type="number" id="nb_employe" v-model="nb_employe" required />
+        </div>
+  
+        <button type="submit">Ajouter une entreprise</button>
+        const entreprise
+      </form>
+        <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </div>
+  </template>
+>>>>>>> 1ab78f6b0d3721e525e9a16a0ed98f23ef299a0f
   
 <script setup>
 import PageHeader from "@/components/PageHeader.vue";

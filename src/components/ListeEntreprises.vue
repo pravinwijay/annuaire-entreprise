@@ -24,7 +24,8 @@
           <td>{{ enterprise.secteur }}</td>
           <td>{{ enterprise.adresse }}</td>
           <td>
-            <button @click="goToEntreprise(enterprise.nom)">Détails</button>
+            <button @click="goToEntreprise(enterprise.id)">Détails</button>
+
           </td>
         </tr>
       </tbody>
@@ -47,6 +48,22 @@ const filteredEnterprises = computed(() =>
     enterprise.secteur.toLowerCase().includes(sectorFilter.value.toLowerCase())
   )
 );
+<<<<<<< HEAD
+=======
+
+// Navigation
+const router = useRouter();
+const goToEntreprise = (enterpriseId) => {
+  router.push(`/entreprise/${enterpriseId}`);
+};
+
+
+const goToRoute = (route) => {
+  router.push(route);
+};
+
+// Récupérer les entreprises depuis l'API
+>>>>>>> 1ab78f6b0d3721e525e9a16a0ed98f23ef299a0f
 const fetchEnterprises = async () => {
   try {
     const response = await axios.get("http://127.0.0.1:8000/api/entreprises");
