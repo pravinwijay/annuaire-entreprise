@@ -40,11 +40,7 @@
           <input type="number" id="nb_employe" v-model="nb_employe" required />
         </div>
   
-        <!-- Champ pour l'image -->
-        <div class="form-group">
-          <label for="image">Image :</label>
-          <input type="text" id="image" v-model="image" required />
-        </div>
+      
   
         <!-- Bouton pour soumettre le formulaire -->
         <button type="submit">Ajouter une entreprise</button>
@@ -84,19 +80,17 @@
   // Fonction de création d'entreprise
   const ajoutEntreprise = async () => {
   try {
-    // Préparation des données du formulaire
-    const formData = new FormData();
-    formData.append("nom", nom.value);
-    formData.append("adresse", adresse.value);
-    formData.append("secteur", secteur.value);
-    formData.append("contact", contact.value);
-    formData.append("nb_employe", Number(nb_employe.value));
-    formData.append("image", image.value); // Ajouter l'image en tant que chaîne
-
-    // Appel POST à l'API pour créer une entreprise
-    const response = await axios.post("http://127.0.0.1:8000/api/entreprises", formData, {
+    // Appel POST à l'API pour créer un utilisateur
+    const response = await axios.post("http://127.0.0.1:8000/api/entreprises", {
+      nom: nom.value,
+      adresse: adresse.value,
+      secteur: secteur.value,
+      contact: contact.value, // Conversion en nombre
+      nb_employe: nb_employe.value, // Le mot de passe
+      image: image.value, // Conversion en booléen
+    }, {
       headers: {
-        "Content-Type": "multipart/form-data", // Indique que le contenu est multipart/form-data
+        "Content-Type": "application/ld+json", // Définir le bon type de contenu
       },
     });
 

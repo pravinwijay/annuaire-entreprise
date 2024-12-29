@@ -24,44 +24,46 @@
               class="filter-input"
             />
           </th>
-          <th>Ville</th>
+          <th>Adresse</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(enterprise, index) in filteredEnterprises" :key="index">
-          <td>{{ enterprise.name }}</td>
-          <td>{{ enterprise.sector }}</td>
-          <td>{{ enterprise.city }}</td>
+          <td>{{ enterprise.nom }}</td>
+          <td>{{ enterprise.secteur }}</td>
+          <td>{{ enterprise.adresse }}</td>
           <td>
-            <button @click="goToEntreprise(enterprise.name)">Détails</button>
+            <button @click="goToEntreprise(enterprise.nom)">Détails</button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Messages -->
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 
-// Mock data
-const enterprises = ref([
-  { name: "Entreprise A", sector: "Technologie", city: "Paris" },
-  { name: "Entreprise B", sector: "Finance", city: "Lyon" },
-]);
+// Initialiser enterprises comme un tableau vide
+const enterprises = ref([]); // Liste des entreprises récupérées depuis l'API
+const sectorFilter = ref(""); // Filtre pour le secteur
+const errorMessage = ref(""); // Message d'erreur
 
-const sectorFilter = ref("");
-
+// Filtrer les entreprises en fonction du filtre
 const filteredEnterprises = computed(() =>
   enterprises.value.filter((enterprise) =>
-    enterprise.sector.toLowerCase().includes(sectorFilter.value.toLowerCase())
+    enterprise.secteur.toLowerCase().includes(sectorFilter.value.toLowerCase())
   )
 );
 
+// Navigation
 const router = useRouter();
-
 const goToEntreprise = (enterpriseName) => {
   router.push(`/entreprise/${enterpriseName}`);
 };
@@ -69,7 +71,24 @@ const goToEntreprise = (enterpriseName) => {
 const goToRoute = (route) => {
   router.push(route);
 };
+
+// Récupérer les entreprises depuis l'API
+const fetchEnterprises = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/entreprises");
+    // Corriger l'accès aux données
+    enterprises.value = response.data.member || []; // Utilisez le champ correct ici
+  } catch (error) {
+    errorMessage.value = "Erreur lors du chargement des entreprises.";
+    enterprises.value = []; // Assurez-vous que enterprises reste un tableau même en cas d'erreur
+  }
+};
+
+// Charger les données lors du montage du composant
+onMounted(fetchEnterprises);
 </script>
+
+
 
 <style scoped>
 /* Container styles */
@@ -177,5 +196,12 @@ button {
 
 button:hover {
   background-color: #746657;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  margin-top: 20px;
+  font-weight: bold;
 }
 </style>
