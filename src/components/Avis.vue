@@ -61,6 +61,10 @@ input {
   border: 1px solid #ccc;
 }
 
+.pageHeader{
+  margin-bottom: 50px;
+}
+
 button {
   background-color: #42b983;
   color: white;

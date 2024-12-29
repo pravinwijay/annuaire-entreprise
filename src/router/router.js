@@ -14,7 +14,7 @@ const routes = [
   { path: '/', component: Accueil },
   { path: '/liste-entreprises', component: ListeEntreprises },  
   { path: '/entreprise/:entrepriseName',component: Entreprise,props: true },
-  { path: "/mes-avis", component: MesAvis }, 
+  { path: "/", component: MesAvis }, 
   { path: "/new-compte", component: NewCompte },
   { path: "/new-entreprise", component: NewEntreprise }, 
   { path: "/login", component: Login }, 

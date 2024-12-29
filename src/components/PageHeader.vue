@@ -6,9 +6,7 @@
   
   <script setup>
   import { defineProps } from 'vue';
-  
-  // Définir une propriété `title` qui sera passée au composant
-  const props = defineProps({
+    const props = defineProps({
     title: {
       type: String,
       required: true,
