@@ -10,6 +10,7 @@ import MesAvis from "../components/MesAvis.vue";
 import NewCompte from "../components/NewCompte.vue";
 import NewEntreprise from '@/components/NewEntreprise.vue';
 import SupprimerEntreprise from '@/components/SupprimerEntreprise.vue';
+import ModifEntreprise from '@/components/ModifEntreprise.vue';
 
 const routes = [
   { path: '/', component: Accueil },
@@ -22,6 +23,7 @@ const routes = [
   { path: '/avis', component: Avis },
   { path: '/mon-compte', component: MonCompte },
   { path: '/suppression/:', component: SupprimerEntreprise },
+  { path: '/modification/:', component: ModifEntreprise },
   { path: '/:pathMatch(.*)*', component: NotFound }, 
 ];
 

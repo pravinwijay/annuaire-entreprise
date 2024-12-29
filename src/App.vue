@@ -13,7 +13,7 @@
         <button>Ajouter une entreprise</button>
       </router-link>
 
-      <router-link to="/liste-entreprises">
+      <router-link to="/modification">
         <button>Modifier une entreprise</button>
       </router-link>
 

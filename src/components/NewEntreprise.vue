@@ -31,7 +31,7 @@
         </div>
   
         <button type="submit">Ajouter une entreprise</button>
-        const entreprise
+        
       </form>
         <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
