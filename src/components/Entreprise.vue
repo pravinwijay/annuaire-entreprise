@@ -1,11 +1,13 @@
 <template>
   <div class="entreprise-container">
+    <!-- Navbar -->
+    
 
     <!-- Main Content -->
     <div class="main-content">
       <div class="right-side">
         <h1>{{ entreprise?.nom || 'Entreprise non trouvée' }}</h1>
-        <p>{{ entreprise?.description || 'Aucune description disponible.' }}</p>
+        <p>{{ entreprise?.secteur || 'Aucune description disponible.' }}</p>
         <button @click="goToComment" class="submit-avis-btn">Saisir mon commentaire</button>
       </div>
       <div class="left-side">
@@ -44,6 +46,7 @@ const entrepriseId = route.params.entrepriseId;
 // Charger les données dynamiquement
 const fetchEntreprise = async () => {
   try {
+    console.log(`Fetching entreprise with ID: ${entrepriseId}`);
     const response = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
     entreprise.value = response.data;
   } catch (error) {
@@ -56,17 +59,26 @@ const fetchCommentaires = async () => {
   try {
     const response = await axios.get("http://127.0.0.1:8000/api/commentaires");
     // Filtrer les commentaires pour l'entreprise en question
-    const allCommentaires = response.data.member;
+    const allCommentaires = response.data.member || [];
     commentairesList.value = await Promise.all(
       allCommentaires
         .filter((comment) => comment.entreprise === `/api/entreprises/${entrepriseId}`)
         .map(async (comment) => {
-          // Récupérer le nom de l'utilisateur pour chaque commentaire
-          const userResponse = await axios.get(`http://127.0.0.1:8000${comment.utilisateur}`);
-          return {
-            utilisateur: userResponse.data.nom || "Utilisateur inconnu",
-            commentaire: comment.commentaire,
-          };
+          const userId = comment.utilisateur; // L'ID de l'utilisateur dans le commentaire
+          try {
+            const userResponse = await axios.get(`http://127.0.0.1:8000${comment.utilisateur}`);
+
+            return {
+              utilisateur: userResponse.data.nom || "Utilisateur inconnu",
+              commentaire: comment.commentaire,
+            };
+          } catch (error) {
+            console.error("Erreur lors de la récupération des informations de l'utilisateur:", error);
+            return {
+              utilisateur: "Utilisateur inconnu",
+              commentaire: comment.commentaire,
+            };
+          }
         })
     );
   } catch (error) {
@@ -82,7 +94,7 @@ const goToRoute = (route) => {
 
 // Naviguer vers la page pour ajouter un commentaire
 const goToComment = () => {
-  router.push({ path: "/commentaires", query: { entreprise: entrepriseId } });
+  router.push({ path: "/avis", query: { entreprise: entrepriseId } });
 };
 
 // Charger les données au montage du composant

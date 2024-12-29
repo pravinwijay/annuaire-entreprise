@@ -29,7 +29,8 @@
           <td>{{ enterprise.secteur }}</td>
           <td>{{ enterprise.adresse }}</td>
           <td>
-            <button @click="goToEntreprise(enterprise.nom)">Détails</button>
+            <button @click="goToEntreprise(enterprise.id)">Détails</button>
+
           </td>
         </tr>
       </tbody>
@@ -59,9 +60,10 @@ const filteredEnterprises = computed(() =>
 
 // Navigation
 const router = useRouter();
-const goToEntreprise = (enterpriseName) => {
-  router.push(`/entreprise/${enterpriseName}`);
+const goToEntreprise = (enterpriseId) => {
+  router.push(`/entreprise/${enterpriseId}`);
 };
+
 
 const goToRoute = (route) => {
   router.push(route);

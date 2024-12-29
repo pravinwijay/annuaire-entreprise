@@ -17,7 +17,7 @@
         <button>Modifier une entreprise</button>
       </router-link>
 
-      <router-link to="/liste-entreprises">
+      <router-link to="/suppression">
         <button>Supprimer une entreprise</button>
       </router-link>
     </div>
