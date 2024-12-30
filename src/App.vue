@@ -30,6 +30,9 @@
           <router-link to="/modification/:id">
             <button>Modifier une entreprise</button>
           </router-link>
+          <router-link to="/modificationUtilisateur/:id">
+            <button>Modifier un utilisateur</button>
+          </router-link>
 
           <router-link to="/suppression/:id">
             <button>Supprimer une entreprise</button>

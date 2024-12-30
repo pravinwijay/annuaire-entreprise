@@ -14,6 +14,7 @@ import ModifEntreprise from '@/components/ModifEntreprise.vue';
 import Accueil from '@/components/Accueil.vue';
 import Deconnexion from '@/components/Deconnexion.vue';
 import SupprimerCompte from '@/components/SupprimerCompte.vue';
+import ModifUtilisateur from '@/components/ModifUtilisateur.vue';
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -34,6 +35,7 @@ const routes = [
   { path: '/suppression/:id', component: SupprimerEntreprise, meta: { requiresAuth: true, role: 'admin' } },
   { path: '/suppression-compte/:id', component: SupprimerCompte, meta: { requiresAuth: true, role: 'admin' } },
   { path: '/modification/:id', component: ModifEntreprise, meta: { requiresAuth: true, role: 'admin' } },
+  { path: '/modificationUtilisateur/:id', component: ModifUtilisateur, meta: { requiresAuth: true, role: 'admin' } },
 ];
 
 

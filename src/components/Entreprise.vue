@@ -4,12 +4,10 @@
     <div class="main-content">
       <div class="right-side">
         <h1>{{ entreprise?.nom || 'Entreprise non trouvée' }}</h1>
-        <p>{{ entreprise?.secteur || 'Aucune description disponible.' }}</p>
+        <p>Secteur: {{ entreprise?.secteur || 'Aucune description disponible.' }}</p>
         <button @click="goToComment" class="submit-avis-btn">Saisir mon commentaire</button>
       </div>
-      <div class="left-side">
-        <img :src="entreprise?.image || 'https://via.placeholder.com/400x300'" alt="Image de l'entreprise" />
-      </div>
+   
     </div>
 
     <div class="avis-list">
@@ -103,6 +101,7 @@ onMounted(async () => {
 <style scoped>
 .entreprise-container {
   background-color: #e7dfd8;
+  margin-top: 100px;
 }
 .navbar {
   display: flex;
@@ -117,17 +116,7 @@ onMounted(async () => {
   align-items: flex-start;
   padding: 50px;
 }
-.left-side {
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
-.left-side h1 {
-  color: #746657;
-  margin-bottom: 20px;
-}
 .submit-avis-btn {
   background-color: #42b983;
   color: white;
