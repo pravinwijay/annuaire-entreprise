@@ -1,8 +1,5 @@
 <template>
   <div class="entreprise-container">
-  
-    
-
     <!-- Main Content -->
     <div class="main-content">
       <div class="right-side">
@@ -34,12 +31,16 @@ const commentairesList = ref([]);
 const route = useRoute();
 const router = useRouter();
 
-const entrepriseId = route.params.entrepriseId;
+// Récupérer l'ID de l'entreprise depuis les query parameters (pas params)
+const entrepriseId = route.params.entrepriseId; // Récupérer l'ID de l'entreprise depuis l'URL
+// Utilisez route.query pour récupérer l'ID
 
+// Fonction pour récupérer les données de l'entreprise
 const fetchEntreprise = async () => {
   try {
     console.log(`Fetching entreprise with ID: ${entrepriseId}`);
     const response = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
+    console.log("Réponse de l'entreprise : ", response.data); // Ajoutez cette ligne pour déboguer
     entreprise.value = response.data;
   } catch (error) {
     console.error("Erreur lors de la récupération des données de l'entreprise:", error);
@@ -47,6 +48,9 @@ const fetchEntreprise = async () => {
   }
 };
 
+
+
+// Fonction pour récupérer les commentaires associés à l'entreprise
 const fetchCommentaires = async () => {
   try {
     const response = await axios.get("http://127.0.0.1:8000/api/commentaires");
@@ -55,10 +59,9 @@ const fetchCommentaires = async () => {
       allCommentaires
         .filter((comment) => comment.entreprise === `/api/entreprises/${entrepriseId}`)
         .map(async (comment) => {
-          const userId = comment.utilisateur; // L'ID de l'utilisateur dans le commentaire
+          const userId = comment.utilisateur;
           try {
             const userResponse = await axios.get(`http://127.0.0.1:8000${comment.utilisateur}`);
-
             return {
               utilisateur: userResponse.data.nom || "Utilisateur inconnu",
               commentaire: comment.commentaire,
@@ -78,17 +81,19 @@ const fetchCommentaires = async () => {
   }
 };
 
-// Naviguer vers une autre page
-const goToRoute = (route) => {
-  router.push(route);
-};
-
+// Naviguer vers la page des avis en passant l'ID de l'entreprise dans les query parameters
 // Naviguer vers la page pour ajouter un commentaire
 const goToComment = () => {
-  router.push({ path: "/avis", query: { entreprise: entrepriseId } });
+  if (entreprise.value && entreprise.value.id) {
+    // Vérifiez que l'ID de l'entreprise est disponible avant de faire la redirection
+    router.push({ path: `/avis/${entreprise.value.id}` });
+  } else {
+    console.error("L'ID de l'entreprise est introuvable.");
+  }
 };
 
-// Charger les données au montage du composant
+
+// Charger les données de l'entreprise et les commentaires lors du montage du composant
 onMounted(async () => {
   await fetchEntreprise();
   await fetchCommentaires();
@@ -159,4 +164,5 @@ onMounted(async () => {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
-}</style>
+}
+</style>

@@ -1,6 +1,5 @@
 <template>
   <div class="mes-avis-container">
-
     <div class="main-content">
       <h1 class="title">MES AVIS</h1>
 
@@ -10,9 +9,9 @@
         </div>
 
         <div v-for="(avis, index) in userAvis" :key="index" class="avis-bubble">
-          <h3>{{ avis.entreprise }}</h3>
+          <h3>{{ avis.entreprise }}</h3> <!-- Nom de l'entreprise -->
           <p>{{ avis.text }}</p>
-          <small>— {{ avis.utilisateurNom }}</small>
+          
         </div>
       </div>
     </div>
@@ -24,37 +23,69 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
-const router = useRouter();
+// Récupérer l'utilisateur actuellement connecté
+const user = JSON.parse(localStorage.getItem('user')); // Assurez-vous que 'user' est bien stocké dans localStorage
+const utilisateurId = user ? user.id : null;  // Utilisez l'ID de l'utilisateur connecté
 
 const userAvis = ref([]);
-const utilisateurId = "/api/utilisateurs/4";
 
 const fetchUserAvis = async () => {
+  if (!utilisateurId) {
+    console.error("Utilisateur non connecté ou ID manquant");
+    return;
+  }
+
   try {
+    // Récupérer tous les commentaires
     const response = await axios.get("http://127.0.0.1:8000/api/commentaires");
-    const commentaires = response.data.member;
-    const userComments = commentaires.filter(comment => comment.utilisateur === utilisateurId);
 
-    userAvis.value = await Promise.all(
-      userComments.map(async (comment) => {
-        const utilisateurResponse = await axios.get(`http://127.0.0.1:8000${comment.utilisateur}`);
-        const entrepriseResponse = await axios.get(`http://127.0.0.1:8000${comment.entreprise}`);
+    if (response.data && response.data.member) {
+      const commentaires = response.data.member;
 
-        return {
-          entreprise: entrepriseResponse.data.nom,
-          text: comment.commentaire,
-          date: comment.date,
-          utilisateurNom: utilisateurResponse.data.nom,
-        };
-      })
-    );
+      // Filtrer les commentaires de l'utilisateur actuel en comparant avec l'URL complète
+      const userComments = commentaires.filter(comment => {
+        return comment.utilisateur === `/api/utilisateurs/${utilisateurId}`;
+      });
+
+      if (userComments.length > 0) {
+        // Récupérer les détails de chaque commentaire
+        userAvis.value = await Promise.all(
+          userComments.map(async (comment) => {
+            // Récupérer l'utilisateur qui a laissé le commentaire
+            const utilisateurResponse = await axios.get(comment.utilisateur);
+            // Récupérer l'ID de l'entreprise liée au commentaire
+            const entrepriseId = comment.entreprise.split("/").pop(); // Extraire l'ID de l'entreprise de l'URL
+
+            // Faire une requête pour récupérer le nom de l'entreprise
+            const entrepriseResponse = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
+
+            return {
+              entreprise: entrepriseResponse.data.nom,  // Nom de l'entreprise
+              text: comment.commentaire,  // Commentaire de l'utilisateur
+              date: comment.date,  // Date du commentaire (si nécessaire)
+              utilisateurNom: utilisateurResponse.data.nom,  // Nom de l'utilisateur
+            };
+          })
+        );
+      } else {
+        console.log("Aucun avis trouvé pour cet utilisateur");
+      }
+    } else {
+      console.error("Erreur dans la réponse de l'API pour les commentaires");
+    }
   } catch (error) {
     console.error("Erreur lors de la récupération des avis :", error);
   }
 };
 
 onMounted(() => {
-  fetchUserAvis();
+  // Vérifiez si l'utilisateur est connecté et récupérez ses avis
+  if (utilisateurId) {
+    fetchUserAvis();
+  } else {
+    console.log("Utilisateur non connecté, redirection vers la page de connexion.");
+    router.push('/login'); // Redirige vers la page de connexion si aucun utilisateur connecté
+  }
 });
 </script>
 
@@ -74,14 +105,16 @@ onMounted(() => {
 .navbar button:hover {
   text-decoration: underline;
 }
+
 .title {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
-  margin-top: 30px;
+  margin-top: 100px;
   color: #746657;
 }
+
 .avis-list {
   padding: 20px;
   margin-top: 20px;

@@ -16,7 +16,9 @@
     </div>
   </div>
 </template>
-
+<script setup>
+console.log(localStorage);
+</script>
 <style scoped>
 .accueil-container {
   width: 100%;
