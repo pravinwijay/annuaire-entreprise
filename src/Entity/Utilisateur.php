@@ -9,7 +9,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new \ApiPlatform\Metadata\Get(),
+        new \ApiPlatform\Metadata\GetCollection(),
+        new \ApiPlatform\Metadata\Get(
+            uriTemplate: '/users/by-email/{email}',
+            name: 'get_user_by_email',
+            requirements: ['email' => '.+'],
+        ),
+        new \ApiPlatform\Metadata\Post(),     // Ajoute l'opération POST
+        new \ApiPlatform\Metadata\Patch(),    // Ajoute l'opération PATCH
+        new \ApiPlatform\Metadata\Put(),      // Ajoute l'opération PUT
+        new \ApiPlatform\Metadata\Delete(),   // Ajoute l'opération DELETE
+    ]
+)]
 class Utilisateur
 {
     #[ORM\Id]
@@ -135,3 +149,4 @@ class Utilisateur
         return $this;
     }
 }
+
