@@ -40,33 +40,28 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios"; // Importer axios pour effectuer des requêtes HTTP
-import { useRouter } from "vue-router";
+import axios from "axios";
 
-// Déclaration de la variable user avec des valeurs par défaut
 const user = ref({
   firstName: "",
   lastName: "",
   email: "",
   phone: "",
-  profileImage: "https://i.pinimg.com/236x/14/6d/e1/146de169d3133554a6d907b837d31377.jpg", // Image par défaut
+  profileImage: "https://i.pinimg.com/236x/14/6d/e1/146de169d3133554a6d907b837d31377.jpg",
 });
 
 onMounted(async () => {
-  // Vérifier si l'utilisateur est stocké dans localStorage
   const storedUser = JSON.parse(localStorage.getItem('user'));
   if (storedUser && storedUser.id) {
     try {
-      // Récupérer les données de l'utilisateur via l'API en utilisant son ID
       const response = await axios.get(`http://127.0.0.1:8000/api/utilisateurs/${storedUser.id}`);
-      
-      // Si les données sont correctement récupérées, on met à jour le formulaire
+
       if (response.data) {
-        user.value.firstName = response.data.nom || '';  // Nom de l'utilisateur
-        user.value.lastName = response.data.prenom || '';  // Prénom de l'utilisateur
-        user.value.email = response.data.email || '';  // Email de l'utilisateur
-        user.value.phone = response.data.telephone || '';  // Téléphone de l'utilisateur
-        user.value.profileImage = response.data.profileImage || user.value.profileImage;  // Image de profil si disponible
+        user.value.firstName = response.data.nom || '';
+        user.value.lastName = response.data.prenom || '';
+        user.value.email = response.data.email || '';
+        user.value.phone = response.data.telephone || '';
+        user.value.profileImage = response.data.profileImage || user.value.profileImage;
       } else {
         console.log("Utilisateur non trouvé");
       }
@@ -78,7 +73,6 @@ onMounted(async () => {
   }
 });
 
-// Fonction pour soumettre le formulaire et mettre à jour l'utilisateur via un PATCH
 const submitForm = async () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   if (!storedUser || !storedUser.id) {
@@ -88,22 +82,19 @@ const submitForm = async () => {
   }
 
   try {
-    // URL de l'API pour la mise à jour
     const apiUrl = `http://127.0.0.1:8000/api/utilisateurs/${storedUser.id}`;
-    
-    // Si l'API nécessite un token d'authentification
-    const token = localStorage.getItem('authToken'); // Assurez-vous que le token est stocké dans le localStorage ou ailleurs
+    const token = localStorage.getItem('authToken');
     const headers = {
       "Content-Type": "application/merge-patch+json",
-      "Authorization": `Bearer ${token}`, // Si nécessaire
+      "Authorization": `Bearer ${token}`,
     };
 
     const response = await axios.patch(apiUrl, {
-      nom: user.value.firstName,  // Correspond au champ "nom" dans la BD
-      prenom: user.value.lastName,  // Correspond au champ "prenom" dans la BD
-      email: user.value.email,  // Correspond au champ "email" dans la BD
-      telephone: user.value.phone,  // Correspond au champ "telephone" dans la BD
-      profileImage: user.value.profileImage,  // Si nécessaire, sinon laissez vide
+      nom: user.value.firstName,
+      prenom: user.value.lastName,
+      email: user.value.email,
+      telephone: user.value.phone,
+      profileImage: user.value.profileImage,
     }, { headers });
 
     if (response.status === 200) {
@@ -118,10 +109,6 @@ const submitForm = async () => {
   }
 };
 </script>
-
-
-
-
 
 <style scoped>
 .mon-compte-container {
@@ -222,7 +209,6 @@ const submitForm = async () => {
   outline: none;
 }
 
-/* Bouton de validation */
 .submit-btn {
   background-color: #746657;
   color: white;

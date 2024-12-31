@@ -29,14 +29,13 @@ import { useRouter } from "vue-router";
 const email = ref("");
 const password = ref("");
 const errorMessage = ref("");
-const isLoading = ref(false); // Indicateur de chargement
+const isLoading = ref(false);
 const router = useRouter();
 
 const login = async () => {
   try {
-    isLoading.value = true; // Afficher le chargement pendant la requête
+    isLoading.value = true;
 
-    // Appeler l'API de connexion
     const response = await fetch('http://127.0.0.1:8000/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -52,13 +51,11 @@ const login = async () => {
 
     const data = await response.json();
 
-    // Vérification de la réponse pour s'assurer que le rôle est bien inclus
     console.log("Utilisateur connecté :", data);
     if (data.is_admin === undefined) {
       throw new Error("Rôle de l'utilisateur non trouvé dans la réponse.");
     }
 
-    // Stocker les informations de l'utilisateur et le rôle
     localStorage.setItem("user", JSON.stringify({
       id: data.id,
       nom: data.nom,
@@ -66,16 +63,14 @@ const login = async () => {
       role: data.is_admin ? "admin" : "user"
     }));
 
-    // Rediriger vers la page d'accueil après la connexion
     router.push("/accueil");
 
-    // Rafraîchir l'état de la page en réinitialisant la page entière
     window.location.reload();
 
   } catch (error) {
     errorMessage.value = error.message;
   } finally {
-    isLoading.value = false; // Masquer l'indicateur de chargement
+    isLoading.value = false;
   }
 };
 </script>
@@ -86,6 +81,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #e7dfd8;
 }
+
 .pageHeader {
   margin-bottom: 50px;
 }

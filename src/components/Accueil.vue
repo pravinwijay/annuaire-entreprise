@@ -2,16 +2,15 @@
   <div class="accueil-container">
     <div class="main-content">
       <div class="left-side">
-        <h1>Bienvenue sur notre site !</h1>
+        <h1>Bienvenue sur l'annuaire des entreprises !</h1>
         <p>
           Découvrez nos services et explorez les différentes solutions que
           nous vous proposons. Nous avons tout ce qu'il vous faut pour
-          améliorer votre entreprise et optimiser vos processus.
+          améliorer votre point de vue sur les entreprises et vous aider à vous orienter.
         </p>
       </div>
       <div class="right-side">
-        <img
-          src="https://ceoworld.biz/wp-content/uploads/2019/06/Apple.jpg"/>
+        <img src="https://cdn.futura-sciences.com/sources/images/BUILDINGS%20%C3%80%20VOIR.jpeg" />
       </div>
     </div>
   </div>
@@ -28,6 +27,7 @@ console.log(localStorage);
   align-items: center;
   background-color: #e7dfd8;
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -41,6 +41,7 @@ console.log(localStorage);
   left: 0;
   z-index: 100;
 }
+
 .navbar button {
   padding: 10px 20px;
   border: none;
@@ -51,13 +52,16 @@ console.log(localStorage);
   text-transform: uppercase;
   cursor: pointer;
 }
+
 .navbar button:hover {
   color: #ffffff;
 }
+
 .navbar .center {
   margin-left: auto;
   margin-right: auto;
 }
+
 .main-content {
   display: flex;
   justify-content: space-between;
@@ -65,9 +69,10 @@ console.log(localStorage);
   margin-top: 80px;
   padding: 20px;
   width: 100%;
-  height: calc(100vh - 80px); 
+  height: calc(100vh - 80px);
   box-sizing: border-box;
 }
+
 .left-side {
   flex: 1;
   display: flex;
@@ -77,16 +82,19 @@ console.log(localStorage);
   text-align: left;
   padding: 20px;
 }
+
 .left-side h1 {
   font-size: 2.5rem;
   color: #333;
   margin-bottom: 20px;
 }
+
 .left-side p {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #555;
 }
+
 .right-side {
   flex: 1;
   display: flex;
@@ -94,10 +102,10 @@ console.log(localStorage);
   align-items: center;
   padding: 20px;
 }
+
 .right-side img {
   max-width: 100%;
   max-height: 80%;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-</style>
+}</style>

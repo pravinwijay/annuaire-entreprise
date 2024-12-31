@@ -7,12 +7,7 @@
           <th>Nom</th>
           <th>
             Secteur
-            <input
-              type="text"
-              v-model="sectorFilter"
-              placeholder="Filtrer"
-              class="filter-input"
-            />
+            <input type="text" v-model="sectorFilter" placeholder="Filtrer" class="filter-input" />
           </th>
           <th>Adresse</th>
           <th>Actions</th>
@@ -40,7 +35,7 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 
 const enterprises = ref([]);
-const sectorFilter = ref(""); 
+const sectorFilter = ref("");
 const errorMessage = ref("");
 
 const filteredEnterprises = computed(() =>
@@ -49,7 +44,6 @@ const filteredEnterprises = computed(() =>
   )
 );
 
-// Navigation
 const router = useRouter();
 const goToEntreprise = (enterpriseId) => {
   router.push(`/entreprise/${enterpriseId}`);
@@ -60,14 +54,13 @@ const goToRoute = (route) => {
   router.push(route);
 };
 
-// Récupérer les entreprises depuis l'API
 const fetchEnterprises = async () => {
   try {
     const response = await axios.get("http://127.0.0.1:8000/api/entreprises");
-    enterprises.value = response.data.member || []; 
+    enterprises.value = response.data.member || [];
   } catch (error) {
     errorMessage.value = "Erreur lors du chargement des entreprises.";
-    enterprises.value = []; 
+    enterprises.value = [];
   }
 };
 onMounted(fetchEnterprises);
@@ -77,44 +70,48 @@ onMounted(fetchEnterprises);
 .entreprise-container {
   background-color: #e7dfd8;
   text-align: center;
-  padding-top: 100px; 
+  padding-top: 100px;
 }
 
 .navbar button {
   padding: 10px 20px;
   border: none;
-  background-color: transparent; 
+  background-color: transparent;
   color: #e7dfd8;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  outline: none; 
+  outline: none;
 }
 
 .navbar button:hover {
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 .navbar button:active,
 .navbar button:focus {
-  background-color: transparent; 
-  box-shadow: none; 
+  background-color: transparent;
+  box-shadow: none;
 }
+
 h1 {
   color: #746657;
   margin: 40px 0;
 }
+
 .enterprise-table {
   margin: 0 auto;
   width: 80%;
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; 
-  overflow: hidden; 
+  border-radius: 8px;
+  overflow: hidden;
 }
-.enterprise-table th,.enterprise-table td {
+
+.enterprise-table th,
+.enterprise-table td {
   padding: 12px;
   text-align: left;
   border: 1px solid #ccc;
@@ -128,9 +125,11 @@ h1 {
 .enterprise-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+
 .enterprise-table tr:hover {
   background-color: #f1f1f1;
 }
+
 .filter-input {
   margin-top: 5px;
   padding: 5px;

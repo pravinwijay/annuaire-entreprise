@@ -9,9 +9,9 @@
         </div>
 
         <div v-for="(avis, index) in userAvis" :key="index" class="avis-bubble">
-          <h3>{{ avis.entreprise }}</h3> <!-- Nom de l'entreprise -->
+          <h3>{{ avis.entreprise }}</h3>
           <p>{{ avis.text }}</p>
-          
+
         </div>
       </div>
     </div>
@@ -23,9 +23,8 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
-// Récupérer l'utilisateur actuellement connecté
-const user = JSON.parse(localStorage.getItem('user')); // Assurez-vous que 'user' est bien stocké dans localStorage
-const utilisateurId = user ? user.id : null;  // Utilisez l'ID de l'utilisateur connecté
+const user = JSON.parse(localStorage.getItem('user'));
+const utilisateurId = user ? user.id : null;
 
 const userAvis = ref([]);
 
@@ -36,34 +35,28 @@ const fetchUserAvis = async () => {
   }
 
   try {
-    // Récupérer tous les commentaires
     const response = await axios.get("http://127.0.0.1:8000/api/commentaires");
 
     if (response.data && response.data.member) {
       const commentaires = response.data.member;
 
-      // Filtrer les commentaires de l'utilisateur actuel en comparant avec l'URL complète
       const userComments = commentaires.filter(comment => {
         return comment.utilisateur === `/api/utilisateurs/${utilisateurId}`;
       });
 
       if (userComments.length > 0) {
-        // Récupérer les détails de chaque commentaire
         userAvis.value = await Promise.all(
           userComments.map(async (comment) => {
-            // Récupérer l'utilisateur qui a laissé le commentaire
             const utilisateurResponse = await axios.get(comment.utilisateur);
-            // Récupérer l'ID de l'entreprise liée au commentaire
-            const entrepriseId = comment.entreprise.split("/").pop(); // Extraire l'ID de l'entreprise de l'URL
+            const entrepriseId = comment.entreprise.split("/").pop();
 
-            // Faire une requête pour récupérer le nom de l'entreprise
             const entrepriseResponse = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
 
             return {
-              entreprise: entrepriseResponse.data.nom,  // Nom de l'entreprise
-              text: comment.commentaire,  // Commentaire de l'utilisateur
-              date: comment.date,  // Date du commentaire (si nécessaire)
-              utilisateurNom: utilisateurResponse.data.nom,  // Nom de l'utilisateur
+              entreprise: entrepriseResponse.data.nom,
+              text: comment.commentaire,
+              date: comment.date,
+              utilisateurNom: utilisateurResponse.data.nom,
             };
           })
         );
@@ -79,12 +72,11 @@ const fetchUserAvis = async () => {
 };
 
 onMounted(() => {
-  // Vérifiez si l'utilisateur est connecté et récupérez ses avis
   if (utilisateurId) {
     fetchUserAvis();
   } else {
     console.log("Utilisateur non connecté, redirection vers la page de connexion.");
-    router.push('/login'); // Redirige vers la page de connexion si aucun utilisateur connecté
+    router.push('/login');
   }
 });
 </script>
