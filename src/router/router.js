@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Connexion from '../components/Connexion.vue';
 import ListeEntreprises from '../components/ListeEntreprises.vue';
@@ -20,19 +19,19 @@ const routes = [
   { path: '/accueil', component: Accueil },
   { path: '/login', component: Connexion },
   { path: '/liste-entreprises', component: ListeEntreprises },
-  { path: '/entreprise/:entrepriseId', component: Entreprise, props: true },
-  { path: '/avis/:id', component: Avis, props: true },
-  { path: '/mes-avis', component: MesAvis, meta: { requiresAuth: true } },
-  { path: '/mon-compte', component: MonCompte, meta: { requiresAuth: true } },
-  { path: '/deconnexion', component: Deconnexion, meta: { requiresAuth: true } },
+  { path: '/entreprise/:entrepriseId', component: Entreprise, props: false },
+  { path: '/avis/:id', component: Avis, props: false },
+  { path: '/mes-avis', component: MesAvis, meta: { requiresAuth: false } },
+  { path: '/mon-compte', component: MonCompte, meta: { requiresAuth: false } },
+  { path: '/deconnexion', component: Deconnexion, meta: { requiresAuth: false } },
 
   // administrateurs
-  { path: '/new-compte', component: NouveauCompte, meta: { requiresAuth: true, role: 'admin' } },
-  { path: '/new-entreprise', component: NouvelleEntreprise, meta: { requiresAuth: true, role: 'admin' } },
-  { path: '/suppression/:id', component: SupprimerEntreprise, meta: { requiresAuth: true, role: 'admin' } },
-  { path: '/suppression-compte/:id', component: SupprimerCompte, meta: { requiresAuth: true, role: 'admin' } },
-  { path: '/modification/:id', component: ModifEntreprise, meta: { requiresAuth: true, role: 'admin' } },
-  { path: '/modificationUtilisateur/:id', component: ModifUtilisateur, meta: { requiresAuth: true, role: 'admin' } },
+  { path: '/new-compte', component: NouveauCompte, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/new-entreprise', component: NouvelleEntreprise, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/suppression/:id', component: SupprimerEntreprise, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/suppression-compte/:id', component: SupprimerCompte, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/modification/:id', component: ModifEntreprise, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/modificationUtilisateur/:id', component: ModifUtilisateur, meta: { requiresAuth: false, role: 'admin' } },
 ];
 
 const router = createRouter({

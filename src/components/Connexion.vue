@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="content">
-      <PageHeader class="pageHeader" title="Connexion" />
+      <PageHeader class="pageHeader" title="Vous êtes ?" />
       <form @submit.prevent="login">
         <div class="form-group">
           <label for="email">Email :</label>
@@ -96,9 +96,9 @@ body {
 }
 
 form {
-  background: white;
+  background:#e7dfd8;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 0px;
   border-radius: 8px;
   max-width: 300px;
   width: 100%;
@@ -115,7 +115,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 95%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

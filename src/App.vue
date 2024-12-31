@@ -1,13 +1,49 @@
 <template>
   <div>
     <div class="navbar">
-      <router-link to="/accueil">
-        <button>Accueil</button>
-      </router-link>
+      <div class="dropdown">
+        <button @click="toggleMenu('entreprise')">Entreprise</button>
+        <div v-if="openMenu === 'entreprise'" class="dropdown-menu">
 
-      <router-link to="/liste-entreprises">
-        <button>Les entreprises</button>
-      </router-link>
+          <router-link to="/liste-entreprises">
+            <button>Les entreprises</button>
+          </router-link>
+
+          <template v-if="isAdmin">
+            <router-link to="/new-entreprise">
+              <button>Ajouter une entreprise</button>
+            </router-link>
+
+            <router-link to="/modification/:id">
+              <button>Modifier une entreprise</button>
+            </router-link>
+
+            <router-link to="/suppression/:id">
+              <button>Supprimer une entreprise</button>
+            </router-link>
+          </template>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button @click="toggleMenu('utilisateur')">Utilisateur</button>
+        <div v-if="openMenu === 'utilisateur'" class="dropdown-menu">
+          <template v-if="isAdmin">
+
+            <router-link to="/new-compte">
+              <button>Ajouter un utilisateur</button>
+            </router-link>
+
+            <router-link to="/modificationUtilisateur/:id">
+              <button>Modifier un utilisateur</button>
+            </router-link>
+
+            <router-link to="/suppression-compte/:id">
+              <button>Supprimer un utilisateur</button>
+            </router-link>
+          </template>
+        </div>
+      </div>
 
       <template v-if="isAuthenticated">
         <router-link to="/mes-avis">
@@ -17,34 +53,6 @@
         <router-link to="/mon-compte">
           <button>Mon compte</button>
         </router-link>
-
-        <template v-if="isAdmin">
-          <router-link to="/new-entreprise">
-            <button>Ajouter une entreprise</button>
-          </router-link>
-
-          <router-link to="/modification/:id">
-            <button>Modifier une entreprise</button>
-          </router-link>
-
-          <router-link to="/suppression/:id">
-            <button>Supprimer une entreprise</button>
-          </router-link>
-
-          <router-link to="/new-compte">
-            <button>Ajouter un utilisateur</button>
-          </router-link>
-
-          <router-link to="/modificationUtilisateur/:id">
-            <button>Modifier un utilisateur</button>
-          </router-link>
-
-          <router-link to="/suppression-compte/:id">
-            <button>Supprimer un utilisateur</button>
-          </router-link>
-
-          
-        </template>
 
         <router-link to="/deconnexion">
           <button>Déconnexion</button>
@@ -62,54 +70,12 @@
   </div>
 </template>
 
-<script
-const isAuthenticated = ref(false);
-const isAdmin = ref(false);
-
-const initUser = () => {
-  const user = JSON.parse(localStorage.getItem('user')); 
-  if (user) {
-    isAuthenticated.value = true;
-    isAdmin.value = user.role === 'admin'; 
-  } else {
-    isAuthenticated.value = false; 
-    isAdmin.value = false; 
-  }
-};
-
-watchEffect(() => {
-  initUser();
-});
-</script>
-
-<style scoped>
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #746657;
-}
-.navbar button {
-  padding: 10px 20px;
-  border: none;
-  background-color: transparent;
-  color: #e7dfd8;
-  font-size: 16px;
-  cursor: pointer;
-  transition: none;
-}
-.navbar button:hover {
-  background-color: transparent;
-  color: #e7dfd8;
-}
-</style>
-
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 
 const isAuthenticated = ref(false);
 const isAdmin = ref(false);
+const openMenu = ref(null);
 
 const initUser = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -118,10 +84,63 @@ const initUser = () => {
     isAdmin.value = user.role === 'admin';
   } else {
     isAuthenticated.value = false;
-    isAdmin.value = false;
+    isAdmin.value = false;         
   }
 };
-watchEffect(() => {
-  initUser();
-});
+
+const toggleMenu = (menu) => {
+  openMenu.value = openMenu.value === menu ? null : menu;
+};
+
+initUser();
 </script>
+
+<style scoped>
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  background-color: #746657;
+  padding: 10px;
+}
+
+.navbar button {
+  padding: 10px 20px;
+  border: none;
+  background-color: transparent;
+  color: #e7dfd8;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  color: #ffffff;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: #746657;
+  border: 1px solid #e7dfd8;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.dropdown-menu button {
+  background-color: transparent;
+  border: none;
+  color: #e7dfd8;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  color: #ffffff;
+}
+</style>
