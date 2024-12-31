@@ -2,7 +2,6 @@
   <div class="avis-container">
     <PageHeader title="Avis" />
 
-    <!-- Afficher le nom de l'entreprise -->
     <h2>Avis pour {{ entreprise.nom }}</h2>
 
     <ul>
@@ -68,18 +67,18 @@ const submitAvis = async () => {
       const entrepriseUrl = `/api/entreprises/${entrepriseId}`;
 
       const response = await axios.post("http://127.0.0.1:8000/api/commentaires", {
-        utilisateur: utilisateurUrl,
-        entreprise: entrepriseUrl,
-        commentaire: newAvis.value,
+        utilisateur: utilisateurUrl, 
+        entreprise: entrepriseUrl,    
+        commentaire: newAvis.value,   
       }, {
         headers: {
-          "Content-Type": "application/ld+json",
+          "Content-Type": "application/ld+json", 
         },
       });
 
       if (response.status === 201) {
         successMessage.value = "Avis ajouté avec succès.";
-        newAvis.value = "";
+        newAvis.value = ""; 
       } else {
         throw new Error("Erreur lors de l'ajout de l'avis.");
       }

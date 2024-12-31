@@ -20,7 +20,6 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import axios from "axios";
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -53,10 +52,10 @@ const fetchUserAvis = async () => {
             const entrepriseResponse = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
 
             return {
-              entreprise: entrepriseResponse.data.nom,
-              text: comment.commentaire,
-              date: comment.date,
-              utilisateurNom: utilisateurResponse.data.nom,
+              entreprise: entrepriseResponse.data.nom,  
+              text: comment.commentaire,  
+              date: comment.date,  
+              utilisateurNom: utilisateurResponse.data.nom,  
             };
           })
         );

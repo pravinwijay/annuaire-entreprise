@@ -26,21 +26,24 @@
           <router-link to="/modification/:id">
             <button>Modifier une entreprise</button>
           </router-link>
-          <router-link to="/modificationUtilisateur/:id">
-            <button>Modifier un utilisateur</button>
-          </router-link>
 
           <router-link to="/suppression/:id">
             <button>Supprimer une entreprise</button>
           </router-link>
 
-          <router-link to="/suppression-compte/:id">
-            <button>Supprimer un compte</button>
+          <router-link to="/new-compte">
+            <button>Ajouter un utilisateur</button>
           </router-link>
 
-          <router-link to="/new-compte">
-            <button>Créer un compte admin</button>
+          <router-link to="/modificationUtilisateur/:id">
+            <button>Modifier un utilisateur</button>
           </router-link>
+
+          <router-link to="/suppression-compte/:id">
+            <button>Supprimer un utilisateur</button>
+          </router-link>
+
+          
         </template>
 
         <router-link to="/deconnexion">
@@ -59,7 +62,25 @@
   </div>
 </template>
 
+<script
+const isAuthenticated = ref(false);
+const isAdmin = ref(false);
 
+const initUser = () => {
+  const user = JSON.parse(localStorage.getItem('user')); 
+  if (user) {
+    isAuthenticated.value = true;
+    isAdmin.value = user.role === 'admin'; 
+  } else {
+    isAuthenticated.value = false; 
+    isAdmin.value = false; 
+  }
+};
+
+watchEffect(() => {
+  initUser();
+});
+</script>
 
 <style scoped>
 .navbar {
@@ -69,7 +90,6 @@
   padding: 10px;
   background-color: #746657;
 }
-
 .navbar button {
   padding: 10px 20px;
   border: none;
@@ -79,7 +99,6 @@
   cursor: pointer;
   transition: none;
 }
-
 .navbar button:hover {
   background-color: transparent;
   color: #e7dfd8;

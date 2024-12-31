@@ -53,13 +53,13 @@ import axios from "axios";
 import PageHeader from "@/components/PageHeader.vue";
 
 const entreprises = ref([]);
-const selectedEntrepriseId = ref(null);
+const selectedEntrepriseId = ref(null);  
 const entreprise = ref({
   nom: "",
   adresse: "",
-  secteur: "",
-  contact: "",
-  nb_employe: 0,
+  secteur: "",     
+  contact: "",     
+  nb_employe: 0,   
   id: null
 });
 const successMessage = ref("");

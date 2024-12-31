@@ -1,6 +1,7 @@
 <template>
   <div class="utilisateur-container">
     <PageHeader title="Modifier l'utilisateur" />
+
     <div class="form-group">
       <label for="utilisateurSelect">Sélectionner un utilisateur :</label>
       <select id="utilisateurSelect" v-model="selectedUtilisateurId" @change="fetchUtilisateur">
@@ -10,9 +11,8 @@
         </option>
       </select>
     </div>
+
     <form v-if="utilisateur.nom" @submit.prevent="updateUtilisateur">
-
-
       <div class="form-group">
         <label for="utilisateurNom">Nom :</label>
         <input type="text" id="utilisateurNom" v-model="utilisateur.nom" required />
@@ -35,10 +35,12 @@
 
       <button type="submit">Modifier l'utilisateur</button>
     </form>
+
     <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
+
   
 <script setup>
 import { ref } from "vue";
@@ -132,7 +134,6 @@ body {
   background-color: #f0f0f0;
   padding: 20px;
 }
-
 form {
   background: white;
   padding: 20px;
@@ -141,7 +142,6 @@ form {
   max-width: 400px;
   width: 100%;
 }
-
 .form-group {
   margin-bottom: 15px;
 }

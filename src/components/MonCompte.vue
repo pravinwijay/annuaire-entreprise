@@ -4,10 +4,6 @@
 
       <div class="profile-card">
 
-        <div class="left-side">
-          <img :src="user.profileImage" alt="Photo de profil" class="profile-image" />
-        </div>
-
         <div class="right-side">
           <h2>{{ user.firstName.toUpperCase() }} {{ user.lastName.toLowerCase() }}</h2>
 
@@ -157,9 +153,6 @@ const submitForm = async () => {
   align-items: center;
 }
 
-.left-side {
-  margin-right: 30px;
-}
 
 .profile-image {
   width: 150px;
