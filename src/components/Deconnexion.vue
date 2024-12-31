@@ -1,6 +1,5 @@
 <template>
     <div>
-      <!-- Optionnel : Vous pouvez afficher un message ou une animation pendant la déconnexion -->
       <p>Déconnexion en cours...</p>
     </div>
   </template>
@@ -19,7 +18,6 @@
     router.push('/accueil');
   };
   
-  // Appeler la fonction de déconnexion lors du montage du composant
   logout();
   window.location.reload();
   </script>

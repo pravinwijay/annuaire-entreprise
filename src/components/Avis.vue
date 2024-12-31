@@ -2,7 +2,6 @@
   <div class="avis-container">
     <PageHeader title="Avis" />
 
-    <!-- Afficher le nom de l'entreprise -->
     <h2>Avis pour {{ entreprise.nom }}</h2>
 
     <ul>
@@ -27,9 +26,9 @@ import PageHeader from "@/components/PageHeader.vue";
 // Variable pour stocker le nom de l'entreprise et ses données
 const entreprise = ref({});
 
-// Récupérer les paramètres de la route (ID de l'entreprise)
+// Récupére les paramètres de la route (ID de l'entreprise)
 const route = useRoute();
-const entrepriseId = route.params.id; // Utiliser :id pour récupérer l'ID de l'entreprise dans l'URL
+const entrepriseId = route.params.id; 
 
 // Liste des avis pour l'entreprise (initialement vide)
 const commentairesList = ref([]);
@@ -45,7 +44,7 @@ const fetchEntreprise = async () => {
   try {
     console.log(`Fetching entreprise with ID: ${entrepriseId}`);
     const response = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
-    entreprise.value = response.data; // Stocker toutes les données de l'entreprise
+    entreprise.value = response.data; 
   } catch (error) {
     console.error("Erreur lors de la récupération des données de l'entreprise:", error);
     entreprise.value = null;
@@ -56,14 +55,13 @@ const fetchEntreprise = async () => {
 const fetchCommentaires = async () => {
   try {
     const response = await axios.get(`http://127.0.0.1:8000/api/commentaires?entreprise_id=${entrepriseId}`);
-    commentairesList.value = response.data; // Stocker les commentaires pour l'entreprise
+    commentairesList.value = response.data; 
   } catch (error) {
     console.error("Erreur lors de la récupération des commentaires:", error);
     commentairesList.value = [];
   }
 };
 
-// Appeler fetchEntreprise et fetchCommentaires lors du montage du composant
 onMounted(async () => {
   await fetchEntreprise();
   await fetchCommentaires();
@@ -81,16 +79,16 @@ const submitAvis = async () => {
       const response = await axios.post("http://127.0.0.1:8000/api/commentaires", {
         utilisateur: utilisateurUrl,  // URL de l'utilisateur
         entreprise: entrepriseUrl,    // URL de l'entreprise
-        commentaire: newAvis.value,   // Texte du commentaire
+        commentaire: newAvis.value,   
       }, {
         headers: {
-          "Content-Type": "application/ld+json",  // Assurez-vous que le Content-Type est bien défini
+          "Content-Type": "application/ld+json", 
         },
       });
 
       if (response.status === 201) {
         successMessage.value = "Avis ajouté avec succès.";
-        newAvis.value = "";  // Réinitialiser le champ après l'envoi
+        newAvis.value = ""; 
       } else {
         throw new Error("Erreur lors de l'ajout de l'avis.");
       }

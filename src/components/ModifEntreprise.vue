@@ -27,33 +27,25 @@
           <input type="text" id="entrepriseAdresse" v-model="entreprise.adresse" required />
         </div>
   
-        <!-- Nouveau champ Secteur -->
         <div class="form-group">
           <label for="secteur">Secteur :</label>
           <input type="text" id="secteur" v-model="entreprise.secteur" required />
         </div>
   
-        <!-- Nouveau champ Contact -->
         <div class="form-group">
           <label for="contact">Contact :</label>
           <input type="text" id="contact" v-model="entreprise.contact" required />
         </div>
   
-        <!-- Nouveau champ Nombre d'employés -->
         <div class="form-group">
           <label for="nbEmployes">Nombre d'employés :</label>
           <input type="number" id="nbEmployes" v-model="entreprise.nb_employe" required />
         </div>
 
-    
-  
-        <!-- Bouton pour soumettre la modification -->
         <button type="submit">Modifier l'entreprise</button>
       </form>
-  
-      <!-- Message de succès -->
+
       <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-      <!-- Message d'erreur -->
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </template>
@@ -66,13 +58,13 @@ import PageHeader from "@/components/PageHeader.vue";
 
 // Liste des entreprises (au départ vide, remplie après appel API)
 const entreprises = ref([]);
-const selectedEntrepriseId = ref(null);  // ID de l'entreprise sélectionnée
+const selectedEntrepriseId = ref(null);  
 const entreprise = ref({
   nom: "",
   adresse: "",
-  secteur: "",      // Nouveau champ Secteur
-  contact: "",      // Nouveau champ Contact
-  nb_employe: 0,   // Nouveau champ Nombre d'employés
+  secteur: "",     
+  contact: "",     
+  nb_employe: 0,   
   id: null
 });
 const successMessage = ref("");
@@ -103,7 +95,6 @@ const fetchEntreprise = async () => {
 // Fonction pour modifier l'entreprise
 const updateEntreprise = async () => {
   try {
-    // Log pour vérifier les données envoyées
     console.log("Données envoyées à l'API:", {
       nom: entreprise.value.nom,
       adresse: entreprise.value.adresse,
@@ -123,7 +114,7 @@ const updateEntreprise = async () => {
       },
       {
         headers: {
-          "Content-Type": "application/merge-patch+json",  // Assurez-vous que c'est le bon type attendu
+          "Content-Type": "application/merge-patch+json",
         },
       }
     );
@@ -146,14 +137,12 @@ fetchEntreprises();
 </script>
 
 <style scoped>
-/* Style global pour le body */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
 }
 
-/* Conteneur principal */
 .entreprise-container {
   display: flex;
   flex-direction: column;
@@ -164,7 +153,6 @@ body {
   padding: 20px;
 }
 
-/* Formulaire */
 form {
   background: white;
   padding: 20px;
@@ -206,14 +194,12 @@ button:hover {
   background-color: #2980b9;
 }
 
-/* Message de succès */
 .success-message {
   color: green;
   margin-top: 10px;
   font-weight: bold;
 }
 
-/* Message d'erreur */
 .error-message {
   color: red;
   margin-top: 10px;

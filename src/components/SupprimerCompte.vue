@@ -20,9 +20,7 @@
         <button type="button" @click="confirmDelete">Supprimer l'utilisateur</button>
       </form>
   
-      <!-- Message de succès -->
       <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-      <!-- Message d'erreur -->
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </template>
@@ -30,13 +28,11 @@
   <script setup>
   import { ref, onMounted } from "vue";
   import axios from "axios";
-  import PageHeader from "@/components/PageHeader.vue"; // Composant PageHeader
+  import PageHeader from "@/components/PageHeader.vue"; 
   
   // Liste des utilisateurs et l'utilisateur sélectionné
   const utilisateurs = ref([]); 
-  const selectedUtilisateurId = ref(null); // ID de l'utilisateur sélectionné
-  
-  // Message de succès et d'erreur
+  const selectedUtilisateurId = ref(null); 
   const successMessage = ref("");
   const errorMessage = ref("");
   
@@ -44,8 +40,7 @@
   const fetchUtilisateurs = async () => {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/utilisateurs');
-      // Accéder à la propriété 'member' qui contient la liste des utilisateurs
-      utilisateurs.value = response.data.member; // On accède à la propriété 'member'
+      utilisateurs.value = response.data.member; 
     } catch (error) {
       errorMessage.value = "Impossible de récupérer les utilisateurs.";
       successMessage.value = "";
@@ -76,14 +71,12 @@
     }
   };
   
-  // Charger la liste des utilisateurs lors du montage du composant
   onMounted(() => {
     fetchUtilisateurs();
   });
   </script>
   
   <style scoped>
-  /* Style global pour le body */
   body {
     margin: 0;
     font-family: Arial, sans-serif;

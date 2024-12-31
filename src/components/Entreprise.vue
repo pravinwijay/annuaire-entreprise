@@ -1,6 +1,5 @@
 <template>
   <div class="entreprise-container">
-    <!-- Main Content -->
     <div class="main-content">
       <div class="right-side">
         <h1>{{ entreprise?.nom || 'Entreprise non trouvée' }}</h1>
@@ -29,16 +28,15 @@ const commentairesList = ref([]);
 const route = useRoute();
 const router = useRouter();
 
-// Récupérer l'ID de l'entreprise depuis les query parameters (pas params)
-const entrepriseId = route.params.entrepriseId; // Récupérer l'ID de l'entreprise depuis l'URL
-// Utilisez route.query pour récupérer l'ID
+// Récupérer l'ID de l'entreprise depuis l'URL
+const entrepriseId = route.params.entrepriseId; 
 
 // Fonction pour récupérer les données de l'entreprise
 const fetchEntreprise = async () => {
   try {
     console.log(`Fetching entreprise with ID: ${entrepriseId}`);
     const response = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
-    console.log("Réponse de l'entreprise : ", response.data); // Ajoutez cette ligne pour déboguer
+    console.log("Réponse de l'entreprise : ", response.data); 
     entreprise.value = response.data;
   } catch (error) {
     console.error("Erreur lors de la récupération des données de l'entreprise:", error);
@@ -79,19 +77,16 @@ const fetchCommentaires = async () => {
   }
 };
 
-// Naviguer vers la page des avis en passant l'ID de l'entreprise dans les query parameters
+
 // Naviguer vers la page pour ajouter un commentaire
 const goToComment = () => {
   if (entreprise.value && entreprise.value.id) {
-    // Vérifiez que l'ID de l'entreprise est disponible avant de faire la redirection
     router.push({ path: `/avis/${entreprise.value.id}` });
   } else {
     console.error("L'ID de l'entreprise est introuvable.");
   }
 };
 
-
-// Charger les données de l'entreprise et les commentaires lors du montage du composant
 onMounted(async () => {
   await fetchEntreprise();
   await fetchCommentaires();

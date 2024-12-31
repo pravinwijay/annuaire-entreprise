@@ -40,9 +40,7 @@
         <button type="submit">Modifier l'utilisateur</button>
       </form>
   
-      <!-- Message de succès -->
       <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-      <!-- Message d'erreur -->
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </template>
@@ -54,7 +52,7 @@
   
   // Liste des utilisateurs (au départ vide, remplie après appel API)
   const utilisateurs = ref([]);
-  const selectedUtilisateurId = ref(null);  // ID de l'utilisateur sélectionné
+  const selectedUtilisateurId = ref(null); 
   const utilisateur = ref({
     nom: "",
     prenom: "",
@@ -69,7 +67,7 @@
   const fetchUtilisateurs = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/utilisateurs");
-      utilisateurs.value = response.data.member;  // Remplir la liste avec les utilisateurs
+      utilisateurs.value = response.data.member; 
     } catch (error) {
       errorMessage.value = "Erreur lors du chargement des utilisateurs.";
     }
@@ -80,7 +78,7 @@
     if (selectedUtilisateurId.value) {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/utilisateurs/${selectedUtilisateurId.value}`);
-        utilisateur.value = response.data;  // Remplir le formulaire avec les données de l'utilisateur sélectionné
+        utilisateur.value = response.data;  
       } catch (error) {
         errorMessage.value = "Erreur lors du chargement des données de l'utilisateur.";
       }
@@ -90,7 +88,6 @@
   // Fonction pour modifier l'utilisateur
   const updateUtilisateur = async () => {
     try {
-      // Log pour vérifier les données envoyées
       console.log("Données envoyées à l'API:", {
         nom: utilisateur.value.nom,
         prenom: utilisateur.value.prenom,
@@ -108,7 +105,7 @@
         },
         {
           headers: {
-            "Content-Type": "application/merge-patch+json",  // Assurez-vous que c'est le bon type attendu
+            "Content-Type": "application/merge-patch+json",  
           },
         }
       );
@@ -132,14 +129,14 @@
   </script>
   
   <style scoped>
-  /* Style global pour le body */
+
   body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
   }
   
-  /* Conteneur principal */
+
   .utilisateur-container {
     display: flex;
     flex-direction: column;
@@ -150,7 +147,7 @@
     padding: 20px;
   }
   
-  /* Formulaire */
+
   form {
     background: white;
     padding: 20px;
@@ -192,14 +189,13 @@
     background-color: #2980b9;
   }
   
-  /* Message de succès */
+
   .success-message {
     color: green;
     margin-top: 10px;
     font-weight: bold;
   }
-  
-  /* Message d'erreur */
+
   .error-message {
     color: red;
     margin-top: 10px;

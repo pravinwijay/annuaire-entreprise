@@ -9,7 +9,7 @@
         </div>
 
         <div v-for="(avis, index) in userAvis" :key="index" class="avis-bubble">
-          <h3>{{ avis.entreprise }}</h3> <!-- Nom de l'entreprise -->
+          <h3>{{ avis.entreprise }}</h3>
           <p>{{ avis.text }}</p>
           
         </div>
@@ -20,12 +20,11 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import axios from "axios";
 
-// Récupérer l'utilisateur actuellement connecté
-const user = JSON.parse(localStorage.getItem('user')); // Assurez-vous que 'user' est bien stocké dans localStorage
-const utilisateurId = user ? user.id : null;  // Utilisez l'ID de l'utilisateur connecté
+// Récupérer l'utilisateur actuellement connecté depuis le localstorage (c'est pas bien)
+const user = JSON.parse(localStorage.getItem('user')); 
+const utilisateurId = user ? user.id : null;  
 
 const userAvis = ref([]);
 
@@ -60,10 +59,10 @@ const fetchUserAvis = async () => {
             const entrepriseResponse = await axios.get(`http://127.0.0.1:8000/api/entreprises/${entrepriseId}`);
 
             return {
-              entreprise: entrepriseResponse.data.nom,  // Nom de l'entreprise
-              text: comment.commentaire,  // Commentaire de l'utilisateur
-              date: comment.date,  // Date du commentaire (si nécessaire)
-              utilisateurNom: utilisateurResponse.data.nom,  // Nom de l'utilisateur
+              entreprise: entrepriseResponse.data.nom,  
+              text: comment.commentaire,  
+              date: comment.date,  
+              utilisateurNom: utilisateurResponse.data.nom,  
             };
           })
         );

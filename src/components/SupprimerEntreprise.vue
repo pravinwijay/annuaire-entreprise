@@ -5,8 +5,6 @@
       <!-- Liste déroulante pour sélectionner une entreprise -->
       <form @submit.prevent="deleteEntreprise">
         <h2>Choisissez une entreprise à supprimer :</h2>
-  
-        <!-- Liste déroulante -->
         <div class="form-group">
           <label for="entrepriseSelect">Sélectionner une entreprise :</label>
           <select v-model="selectedEntrepriseId" id="entrepriseSelect">
@@ -19,10 +17,7 @@
         <!-- Bouton pour soumettre la demande de suppression -->
         <button type="button" @click="confirmDelete">Supprimer l'entreprise</button>
       </form>
-  
-      <!-- Message de succès -->
       <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-      <!-- Message d'erreur -->
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </template>
@@ -31,13 +26,13 @@
   <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import PageHeader from "@/components/PageHeader.vue"; // Composant PageHeader
+import PageHeader from "@/components/PageHeader.vue"; 
 
 // Liste des entreprises et l'entreprise sélectionnée
 const entreprises = ref([]);
-const selectedEntrepriseId = ref(null); // ID de l'entreprise sélectionnée
+const selectedEntrepriseId = ref(null); 
 
-// Message de succès et d'erreur
+
 const successMessage = ref("");
 const errorMessage = ref("");
 
@@ -45,8 +40,7 @@ const errorMessage = ref("");
 const fetchEntreprises = async () => {
   try {
     const response = await axios.get('http://127.0.0.1:8000/api/entreprises');
-    // Extraire le tableau des entreprises depuis la propriété 'member'
-    entreprises.value = response.data.member; // Ici, nous accédons à 'member' pour récupérer le tableau des entreprises
+    entreprises.value = response.data.member; 
   } catch (error) {
     errorMessage.value = "Impossible de récupérer les entreprises.";
     successMessage.value = "";
@@ -77,7 +71,6 @@ const deleteEntreprise = async () => {
   }
 };
 
-// Charger la liste des entreprises lors du montage du composant
 onMounted(() => {
   fetchEntreprises();
 });
@@ -86,7 +79,6 @@ onMounted(() => {
   
   
   <style scoped>
-  /* Style global pour le body */
   body {
     margin: 0;
     font-family: Arial, sans-serif;

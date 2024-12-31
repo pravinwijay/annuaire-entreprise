@@ -29,12 +29,12 @@ import { useRouter } from "vue-router";
 const email = ref("");
 const password = ref("");
 const errorMessage = ref("");
-const isLoading = ref(false); // Indicateur de chargement
+const isLoading = ref(false);
 const router = useRouter();
 
 const login = async () => {
   try {
-    isLoading.value = true; // Afficher le chargement pendant la requête
+    isLoading.value = true;
 
     // Appeler l'API de connexion
     const response = await fetch('http://127.0.0.1:8000/api/login', {
@@ -69,13 +69,13 @@ const login = async () => {
     // Rediriger vers la page d'accueil après la connexion
     router.push("/accueil");
 
-    // Rafraîchir l'état de la page en réinitialisant la page entière
+    // Rafraîchir la page car sinon la navbar ne se mets pas a jour avec les bons droits
     window.location.reload();
 
   } catch (error) {
     errorMessage.value = error.message;
   } finally {
-    isLoading.value = false; // Masquer l'indicateur de chargement
+    isLoading.value = false;
   }
 };
 </script>
