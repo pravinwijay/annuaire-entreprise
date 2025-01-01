@@ -1,6 +1,6 @@
 <template>
   <div class="avis-container">
-    <PageHeader title="Avis" />
+    
 
     <h2>Avis pour {{ entreprise.nom }}</h2>
 
@@ -98,7 +98,7 @@ const filteredAvisList = computed(() =>
 
 <style scoped>
 .avis-container {
-  padding: 20px;
+  padding: 70px;
   background-color: #e7dfd8;
 }
 
@@ -108,9 +108,7 @@ input {
   border: 1px solid #ccc;
 }
 
-.pageHeader {
-  margin-bottom: 50px;
-}
+
 
 button {
   background-color: #42b983;

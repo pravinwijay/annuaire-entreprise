@@ -40,8 +40,6 @@
             </router-link>
           </div>
         </div>
-       
-
         <div class="dropdown">
           <button @click="toggleMenu('avis')">Avis</button>
           <div v-if="openMenu === 'avis'" class="dropdown-menu">
@@ -50,15 +48,15 @@
             </router-link>
           </div>
         </div>
-
-      
         <router-link to="/deconnexion">
           <button>Déconnexion</button>
         </router-link>
       </template>
 
       <template v-else-if="isAuthenticated">
-    
+        <router-link to="/liste-entreprises">
+              <button>Les entreprises</button>
+            </router-link>
         <router-link to="/mes-avis">
           <button>Mes avis</button>
         </router-link>
