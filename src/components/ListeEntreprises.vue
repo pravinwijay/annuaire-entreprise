@@ -50,9 +50,7 @@ const goToEntreprise = (enterpriseId) => {
 };
 
 
-const goToRoute = (route) => {
-  router.push(route);
-};
+
 
 const fetchEnterprises = async () => {
   try {

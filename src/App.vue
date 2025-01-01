@@ -1,67 +1,82 @@
 <template>
   <div>
     <div class="navbar">
-      <div class="dropdown">
-        <button @click="toggleMenu('entreprise')">Entreprise</button>
-        <div v-if="openMenu === 'entreprise'" class="dropdown-menu">
-
-          <router-link to="/liste-entreprises">
-            <button>Les entreprises</button>
-          </router-link>
-
-          <template v-if="isAdmin">
+    
+      <template v-if="isAuthenticated && isAdmin">
+      
+        <div class="dropdown">
+          <button @click="toggleMenu('entreprise')">Entreprise</button>
+          <div v-if="openMenu === 'entreprise'" class="dropdown-menu">
+            <router-link to="/liste-entreprises">
+              <button>Les entreprises</button>
+            </router-link>
             <router-link to="/new-entreprise">
               <button>Ajouter une entreprise</button>
             </router-link>
-
             <router-link to="/modification/:id">
               <button>Modifier une entreprise</button>
             </router-link>
-
             <router-link to="/suppression/:id">
               <button>Supprimer une entreprise</button>
             </router-link>
-          </template>
+          </div>
         </div>
-      </div>
 
-      <div class="dropdown">
-        <button @click="toggleMenu('utilisateur')">Utilisateur</button>
-        <div v-if="openMenu === 'utilisateur'" class="dropdown-menu">
-          <template v-if="isAdmin">
-
+    
+        <div class="dropdown">
+          <button @click="toggleMenu('utilisateur')">Utilisateur</button>
+          <div v-if="openMenu === 'utilisateur'" class="dropdown-menu">
+            <router-link to="/liste-utilisateurs">
+              <button>Liste des utilisateurs</button>
+            </router-link>
             <router-link to="/new-compte">
               <button>Ajouter un utilisateur</button>
             </router-link>
-
             <router-link to="/modificationUtilisateur/:id">
               <button>Modifier un utilisateur</button>
             </router-link>
-
             <router-link to="/suppression-compte/:id">
               <button>Supprimer un utilisateur</button>
             </router-link>
-          </template>
+          </div>
         </div>
-      </div>
+       
 
-      <template v-if="isAuthenticated">
+        <div class="dropdown">
+          <button @click="toggleMenu('avis')">Avis</button>
+          <div v-if="openMenu === 'avis'" class="dropdown-menu">
+            <router-link to="/liste-avis">
+              <button>Liste des avis</button>
+            </router-link>
+          </div>
+        </div>
+
+      
+        <router-link to="/deconnexion">
+          <button>Déconnexion</button>
+        </router-link>
+      </template>
+
+      <template v-else-if="isAuthenticated">
+    
         <router-link to="/mes-avis">
           <button>Mes avis</button>
         </router-link>
-
         <router-link to="/mon-compte">
           <button>Mon compte</button>
         </router-link>
-
         <router-link to="/deconnexion">
           <button>Déconnexion</button>
         </router-link>
       </template>
 
       <template v-else>
+ 
         <router-link to="/login">
           <button>Login</button>
+        </router-link>
+        <router-link to="/inscription">
+          <button>Inscription</button>
         </router-link>
       </template>
     </div>
@@ -71,31 +86,36 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
+
 
 const isAuthenticated = ref(false);
 const isAdmin = ref(false);
 const openMenu = ref(null);
 
+
 const initUser = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     isAuthenticated.value = true;
-    isAdmin.value = user.role === 'admin';
+    isAdmin.value = user.role === "admin"; 
   } else {
     isAuthenticated.value = false;
-    isAdmin.value = false;         
+    isAdmin.value = false;
   }
 };
+
 
 const toggleMenu = (menu) => {
   openMenu.value = openMenu.value === menu ? null : menu;
 };
 
+
 initUser();
 </script>
 
 <style scoped>
+
 .navbar {
   display: flex;
   justify-content: flex-start;
@@ -103,6 +123,7 @@ initUser();
   background-color: #746657;
   padding: 10px;
 }
+
 
 .navbar button {
   padding: 10px 20px;
@@ -116,6 +137,7 @@ initUser();
 .navbar button:hover {
   color: #ffffff;
 }
+
 
 .dropdown {
   position: relative;

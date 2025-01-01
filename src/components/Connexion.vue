@@ -23,7 +23,7 @@
 
 <script setup>
 import PageHeader from "@/components/PageHeader.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const email = ref("");
@@ -31,6 +31,16 @@ const password = ref("");
 const errorMessage = ref("");
 const isLoading = ref(false);
 const router = useRouter();
+
+
+onMounted(() => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+    
+    router.push("/accueil");
+  }
+});
+
 
 const login = async () => {
   try {
@@ -56,6 +66,7 @@ const login = async () => {
       throw new Error("Rôle de l'utilisateur non trouvé dans la réponse.");
     }
 
+  
     localStorage.setItem("user", JSON.stringify({
       id: data.id,
       nom: data.nom,
@@ -63,7 +74,9 @@ const login = async () => {
       role: data.is_admin ? "admin" : "user"
     }));
 
+    
     router.push("/accueil");
+
 
     window.location.reload();
 
@@ -74,6 +87,7 @@ const login = async () => {
   }
 };
 </script>
+
 
 <style scoped>
 body {

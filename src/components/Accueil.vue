@@ -10,13 +10,13 @@
         </p>
       </div>
       <div class="right-side">
-        <img src="https://cdn.futura-sciences.com/sources/images/BUILDINGS%20%C3%80%20VOIR.jpeg" />
+        <img src="../../public/challengeweb.png" />
       </div>
     </div>
   </div>
 </template>
 <script setup>
-console.log(localStorage);
+  
 </script>
 <style scoped>
 .accueil-container {

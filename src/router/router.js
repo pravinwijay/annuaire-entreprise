@@ -13,25 +13,32 @@ import Accueil from '@/components/Accueil.vue';
 import Deconnexion from '@/components/Deconnexion.vue';
 import SupprimerCompte from '@/components/SupprimerCompte.vue';
 import ModifUtilisateur from '@/components/ModifUtilisateur.vue';
+import Inscription from '@/components/Inscription.vue';
+import ListeUtilisateur from '../components/ListeUtilisateur.vue';
+import ListeAvis from '@/components/ListeAvis.vue';
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/accueil', component: Accueil },
   { path: '/login', component: Connexion },
+  { path: '/inscription', component: Inscription},
   { path: '/liste-entreprises', component: ListeEntreprises },
   { path: '/entreprise/:entrepriseId', component: Entreprise, props: false },
   { path: '/avis/:id', component: Avis, props: false },
   { path: '/mes-avis', component: MesAvis, meta: { requiresAuth: false } },
   { path: '/mon-compte', component: MonCompte, meta: { requiresAuth: false } },
   { path: '/deconnexion', component: Deconnexion, meta: { requiresAuth: false } },
+  
 
-  // administrateurs
+
   { path: '/new-compte', component: NouveauCompte, meta: { requiresAuth: false, role: 'admin' } },
   { path: '/new-entreprise', component: NouvelleEntreprise, meta: { requiresAuth: false, role: 'admin' } },
   { path: '/suppression/:id', component: SupprimerEntreprise, meta: { requiresAuth: false, role: 'admin' } },
   { path: '/suppression-compte/:id', component: SupprimerCompte, meta: { requiresAuth: false, role: 'admin' } },
   { path: '/modification/:id', component: ModifEntreprise, meta: { requiresAuth: false, role: 'admin' } },
   { path: '/modificationUtilisateur/:id', component: ModifUtilisateur, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/liste-utilisateurs', component: ListeUtilisateur, meta: { requiresAuth: false, role: 'admin' } },
+  { path: '/liste-avis', component: ListeAvis, meta: { requiresAuth: false, role: 'admin' } },
 ];
 
 const router = createRouter({
